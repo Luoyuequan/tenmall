@@ -1,2 +1,4 @@
-server.port=80
-server.servlet.context-path=/tenmall
+server:
+  port: 80
+  servlet:
+    context-path: /tenmall
