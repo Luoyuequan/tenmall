@@ -1,0 +1,13 @@
+server:
+  port: 80
+spring:
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://192.168.0.56:3306/tenmall?serverTimezone=GMT%2B8
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 指定 Druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
