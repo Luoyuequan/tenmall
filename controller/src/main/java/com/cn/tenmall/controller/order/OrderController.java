@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 订单管理
+ *
  * @author luoyuequan
  * @version 1.00
  * @ClassName OrderController
@@ -13,8 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order/*")
 public class OrderController {
-    @RequestMapping(value = "getMsg", method = {RequestMethod.GET})
-    public String getMsg() {
+    /**
+     * 订单列表及明细接口
+     *
+     * @return
+     */
+    @RequestMapping(value = "list.do", method = {RequestMethod.POST})
+    public String list() {
+        return "test";
+    }
+
+    /**
+     * 批量发货查询接口
+     *
+     * @return
+     */
+    @RequestMapping(value = "batchlist.do", method = {RequestMethod.POST})
+    public String batchList() {
+        return "test";
+    }
+
+    /**
+     * 批量发货提交接口
+     *
+     * @return
+     */
+    @RequestMapping(value = "batchSendSubmit.do", method = {RequestMethod.POST})
+    public String batchSendSubmit() {
         return "test";
     }
 }
