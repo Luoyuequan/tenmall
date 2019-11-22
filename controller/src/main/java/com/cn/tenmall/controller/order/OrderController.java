@@ -20,7 +20,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping(value = "list.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "list", method = {RequestMethod.POST})
     public String list() {
         return "test";
     }
@@ -30,7 +30,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping(value = "batchlist.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "batchlist", method = {RequestMethod.POST})
     public String batchList() {
         return "test";
     }
@@ -40,7 +40,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping(value = "batchSendSubmit.do", method = {RequestMethod.POST})
+    @RequestMapping(value = "batchSendSubmit", method = {RequestMethod.POST})
     public String batchSendSubmit() {
         return "test";
     }
