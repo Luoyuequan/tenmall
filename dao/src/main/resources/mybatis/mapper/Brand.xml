@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.tenmall.dao.BrandDao">
+    <!-- 查询所有-->
+    <select id="finAll" resultType="com.cn.tenmall.entity.WxTabBrand">
+        select * from wx_tab_brand
+    </select>
+    <!--按id查询-->
+
+
+    <!-- 删除-->
+    <delete id="deleteById">
+        delete from wx_tab_brand where id=#{id}
+    </delete>
+
+    <!--修改-->
+    <update id="update">
+        update wx_tab_brand set name=#{name},image=#{image},letter=#{letter},seq=#{seq} where id=#{id}
+    </update>
+
+    <!--新增-->
+    <insert id="add">
+        insert into wx_tab_brand (name,image,letter,seq) values (#{name},#{image},#{letter},#{seq})
+    </insert>
+</mapper>
