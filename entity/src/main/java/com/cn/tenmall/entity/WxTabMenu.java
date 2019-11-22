@@ -19,14 +19,4 @@ public class WxTabMenu {
     this.parentId = parentId;
   }
 
-  @Override
-  public String toString() {
-    return "WxTabMenu{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", icon='" + icon + '\'' +
-            ", url='" + url + '\'' +
-            ", parentId='" + parentId + '\'' +
-            '}';
-  }
 }
