@@ -1,4 +1,4 @@
-package com.cn.tenmall.controller.order;
+package com.cn.tenmall.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @time 2019/11/21 12:14
  */
 @RestController
-@RequestMapping("/order/*")
+@RequestMapping(value = "/order/*", method = {RequestMethod.POST})
 public class OrderController {
     /**
      * 订单列表及明细接口
      *
      * @return
      */
-    @RequestMapping(value = "list", method = {RequestMethod.POST})
+    @RequestMapping(value = "list")
     public String list() {
         return "test";
     }
@@ -30,7 +30,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping(value = "batchlist", method = {RequestMethod.POST})
+    @RequestMapping(value = "batchlist")
     public String batchList() {
         return "test";
     }
@@ -40,7 +40,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping(value = "batchSendSubmit", method = {RequestMethod.POST})
+    @RequestMapping(value = "batchSendSubmit")
     public String batchSendSubmit() {
         return "test";
     }
