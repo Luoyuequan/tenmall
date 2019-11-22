@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/brand")
@@ -18,23 +18,32 @@ public class WxTabBrandController {
 
     //    查询所有
     @RequestMapping("/findAll")
-    public List<WxTabBrand> findAll() {
-        List<WxTabBrand> wxTabBrands = brandService.finAll();
-        return wxTabBrands;
+    public TenmallResult findAll() {
+        TenmallResult tenmallResult = brandService.finAll();
+        return tenmallResult;
+    }
+
+    // 分页查询&分页查询+条件查询
+    @RequestMapping("/findPage")
+    public TenmallResult findPage(Integer page, Integer size, WxTabBrand searchMap) {
+        if (page == null || page == 0 || size == null) {
+            return TenmallResult.build(400, "参数错误");
+        }
+        TenmallResult tenmallResult = brandService.findPage(page, size, searchMap);
+        return tenmallResult;
     }
 
     //修改
     @RequestMapping("/update")
-    public String update(WxTabBrand wxTabBrand) {
-        brandService.update(wxTabBrand);
-
-        return "kk";
+    public TenmallResult update(WxTabBrand wxTabBrand) {
+        TenmallResult updateResult = brandService.update(wxTabBrand);
+        return updateResult;
     }
 
     //新增
     @RequestMapping("/add")
-    public String add(WxTabBrand wxTabBrand) {
-        brandService.add(wxTabBrand);
-        return "kkk";
+    public TenmallResult add(WxTabBrand wxTabBrand) {
+        TenmallResult addResult = brandService.add(wxTabBrand);
+        return addResult;
     }
 }

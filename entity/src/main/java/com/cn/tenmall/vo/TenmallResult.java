@@ -27,6 +27,10 @@ public class TenmallResult {
         return new TenmallResult(status, msg, data);
     }
 
+    public static TenmallResult build(Integer status, String msg) {
+        return new TenmallResult(status, msg, null);
+    }
+
     public static TenmallResult ok(Object data) {
         return new TenmallResult(data);
     }

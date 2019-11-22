@@ -7,4 +7,6 @@ package com.cn.tenmall.entity;
  * @time 2019/11/21 12:16
  */
 public class OrderEntity {
+
+
 }

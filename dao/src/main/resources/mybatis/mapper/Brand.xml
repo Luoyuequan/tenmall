@@ -7,9 +7,29 @@
     <select id="finAll" resultType="com.cn.tenmall.entity.WxTabBrand">
         select * from wx_tab_brand
     </select>
-    <!--按id查询-->
-
-
+    <sql id="queryWhere">
+        <where>
+            <if test="searchMap!=null">
+                <if test="searchMap.name!=null and searchMap.name!=''">
+                    name like concat("%",#{searchMap.name},"%")
+                </if>
+                <if test="searchMap.letter!=null and searchMap.letter!=''">
+                    letter like concat("%",#{searchMap.letter},"%")
+                </if>
+            </if>
+        </where>
+    </sql>
+    <!--分页查询+条件分页-->
+    <select id="findPage" resultType="com.cn.tenmall.entity.WxTabBrand">
+        select * from wx_tab_brand
+        <include refid="queryWhere"/>
+        limit #{page},#{size}
+    </select>
+    <!--  查询总记录数-->
+    <select id="total" resultType="int">
+        select count(*) from wx_tab_brand
+        <include refid="queryWhere"/>
+    </select>
     <!-- 删除-->
     <delete id="deleteById">
         delete from wx_tab_brand where id=#{id}
