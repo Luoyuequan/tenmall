@@ -1,5 +1,6 @@
 package com.cn.tenmall.controller;
 
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "list")
-    public String list() {
-        return "test";
+    public TenmallResult list() {
+        return null;
     }
 
     /**
@@ -31,8 +32,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "batchlist")
-    public String batchList() {
-        return "test";
+    public TenmallResult batchList() {
+        return null;
     }
 
     /**
@@ -41,7 +42,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "batchSendSubmit")
-    public String batchSendSubmit() {
-        return "test";
+    public TenmallResult batchSendSubmit() {
+        return null;
     }
 }

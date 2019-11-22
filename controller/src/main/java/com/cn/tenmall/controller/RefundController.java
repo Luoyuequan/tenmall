@@ -1,5 +1,6 @@
 package com.cn.tenmall.controller;
 
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class RefundController {
      * @return
      */
     @RequestMapping(value = "list")
-    public String list() {
+    public TenmallResult list() {
         return null;
     }
 
@@ -31,7 +32,7 @@ public class RefundController {
      * @return
      */
     @RequestMapping(value = "approval")
-    public String approval() {
+    public TenmallResult approval() {
         return null;
     }
 
@@ -41,7 +42,7 @@ public class RefundController {
      * @return
      */
     @RequestMapping(value = "casue")
-    public String casue() {
+    public TenmallResult casue() {
         return null;
     }
 }
