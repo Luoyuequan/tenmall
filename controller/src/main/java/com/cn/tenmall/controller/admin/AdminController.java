@@ -12,11 +12,10 @@ package com.cn.tenmall.controller.admin;
 
 import com.cn.tenmall.entity.WxTabAdmin;
 import com.cn.tenmall.service.admin.AdminService;
+import com.cn.tenmall.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,9 +32,16 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-    @GetMapping("login")
-    public void adminLogin(@Param("username")String username,@Param("password")String password){
-        List<WxTabAdmin> list=adminService.findAll();
+    @PostMapping("login")
+    public Message adminLogin(@Param("username")String username, @Param("password")String password){
+        WxTabAdmin admin = adminService.findByUserName(username);
+        if(admin!=null){
+            if((admin.getPassword()).equals(password.trim())){
+                return new Message("0","登录成功");
+            }
+        }
+//        adminService.findAll();
+        return new Message("0","登录失败");
     }
 }
 

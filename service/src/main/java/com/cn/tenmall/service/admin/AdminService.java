@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AdminService {
     List<WxTabAdmin> findAll();
+    WxTabAdmin findByUserName(String username);
 }
