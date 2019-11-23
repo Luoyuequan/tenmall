@@ -11,7 +11,7 @@
 package com.cn.tenmall.controller.admin;
 
 import com.cn.tenmall.entity.WxTabAdmin;
-import com.cn.tenmall.service.order.AdminService;
+import com.cn.tenmall.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +36,6 @@ public class AdminController {
     @GetMapping("login")
     public void adminLogin(@Param("username")String username,@Param("password")String password){
         List<WxTabAdmin> list=adminService.findAll();
-
     }
 }
-class AdminMessage{
-    private String code;
-    private String message;
-}
+

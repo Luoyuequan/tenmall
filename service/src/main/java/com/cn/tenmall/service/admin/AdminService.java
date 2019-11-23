@@ -1,4 +1,4 @@
-package com.cn.tenmall.service.order;
+package com.cn.tenmall.service.admin;
 
 import com.cn.tenmall.entity.WxTabAdmin;
 

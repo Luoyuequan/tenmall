@@ -8,11 +8,11 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.cn.tenmall.service.order.impl;
+package com.cn.tenmall.service.admin.Impl;
 
 import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.entity.WxTabAdmin;
-import com.cn.tenmall.service.order.AdminService;
+import com.cn.tenmall.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
