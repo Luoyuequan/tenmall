@@ -1,14 +1,9 @@
 package com.cn.tenmall.controller;
 
 import com.cn.tenmall.service.OrderService;
-import com.cn.tenmall.vo.TenmallResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,44 +16,56 @@ import java.util.Objects;
  * @ClassName OrderController
  * @time 2019/11/21 12:14
  */
-//@CrossOrigin
+@CrossOrigin
 @RestController
 @RequestMapping(value = "order", method = RequestMethod.POST)
 public class OrderController {
-    @Resource
-    OrderService orderService;
+    private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     /**
      * 订单列表及明细接口
      *
-     * @return
+     * @return 订单列表
      */
-    @RequestMapping(value = "list")
-    public List list(HttpServletRequest request) {
-        Map<String, String[]> map = request.getParameterMap();
-        if (Objects.equals(map.get("page"), null) || Objects.equals(map.get("size"), null)) {
-            return null;
+    @RequestMapping(value = "findAll")
+    public List list(@RequestBody Map data) {
+        if (Objects.equals(data.get("page"), null) || Objects.equals(data.get("size"), null)) {
+            Map<String, Object> vo = new HashMap<>(16);
+            vo.put("code", 1);
+            vo.put("message", "page或size参数缺失,请检查后,重新尝试!");
+            return List.of(vo);
         }
-        return orderService.listInfo();
+        return orderService.listInfo(data);
     }
 
     /**
      * 批量发货查询接口
      *
-     * @return
+     * @return 发货的订单列表
      */
-    @RequestMapping(value = "batchlist", method = RequestMethod.GET)
-    public TenmallResult batchList() {
-        return null;
+    @RequestMapping(value = "batchFindAll")
+    public List batchList(@RequestParam(name = "ids") String ids) {
+        String[] idArray = ids.split(",");
+        return orderService.batchList(idArray);
     }
 
     /**
      * 批量发货提交接口
      *
-     * @return
+     * @return 批量发货提交后信息
      */
     @RequestMapping(value = "batchSendSubmit")
-    public TenmallResult batchSendSubmit() {
-        return null;
+    public Map batchSendSubmit(@RequestBody Map data) {
+        if (data.size() < 3) {
+            Map<String, Object> vo = new HashMap<>(16);
+            vo.put("code", 1);
+            vo.put("message", "orderId、shippingName、shippingCode参数缺失,请检查后,重新尝试!");
+            return vo;
+        }
+        return orderService.batchSendSubmit(data);
     }
 }
