@@ -8,9 +8,8 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.cn.tenmall.controller.admin;
+package com.cn.tenmall.controller.admin.filter;
 
-import com.cn.tenmall.controller.admin.filter.LoginFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
