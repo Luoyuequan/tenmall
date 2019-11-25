@@ -38,6 +38,11 @@
             <artifactId>druid</artifactId>
             <version>1.1.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0-gamma</version>
+        </dependency>
 
     </dependencies>
 

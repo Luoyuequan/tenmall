@@ -28,7 +28,7 @@ public class TenmallResult {
     }
 
     public static TenmallResult build(Integer status, String msg) {
-        return new TenmallResult(status, msg, null);
+        return build(status, msg, null);
     }
 
     public static TenmallResult ok(Object data) {
@@ -36,7 +36,7 @@ public class TenmallResult {
     }
 
     public static TenmallResult ok() {
-        return new TenmallResult(null);
+        return ok(null);
     }
 
     public TenmallResult(Object data) {
