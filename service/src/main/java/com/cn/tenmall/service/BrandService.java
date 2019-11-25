@@ -14,6 +14,8 @@ public interface BrandService {
      */
     TenmallResult finAll();
 
+    TenmallResult findById(Integer id);
+
     /**
      * 修改
      *
@@ -39,4 +41,12 @@ public interface BrandService {
      * @return
      */
     TenmallResult findPage(Integer page, Integer size, WxTabBrand searchMap);
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    TenmallResult deleteById(Integer id);
 }

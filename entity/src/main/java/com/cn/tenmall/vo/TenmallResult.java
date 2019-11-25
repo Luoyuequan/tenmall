@@ -40,7 +40,7 @@ public class TenmallResult {
     }
 
     public TenmallResult(Object data) {
-        this.status = 200;
+        this.status = 1;
         this.msg = "ok";
         this.data = data;
     }

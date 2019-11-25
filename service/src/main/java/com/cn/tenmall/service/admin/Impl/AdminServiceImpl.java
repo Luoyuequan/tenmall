@@ -40,13 +40,41 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public WxTabAdmin findByUserName(String username) {
+    public WxTabAdmin findByUserName(String loginName) {
         Map<String,Object> m = new HashMap<>();
-        m.put("login_name",username);
+        m.put("login_name",loginName);
         WxTabAdmin w= adminDao.selectByMap(m).get(0);
         if(w!=null){
             return w;
         }
         return null;
+    }
+
+    /**
+     * 更改为登录状态
+     * @param loginName
+     * @return
+     */
+    @Override
+    public Integer loginStatus(String loginName) {
+        return adminDao.updateStatus(loginName,0);
+    }
+    /**
+     * 更改为冻结状态
+     * @param loginName
+     * @return
+     */
+    @Override
+    public Integer logoutStatus(String loginName) {
+        return adminDao.updateStatus(loginName,1);
+    }
+    /**
+     * 更改为删除状态
+     * @param loginName
+     * @return
+     */
+    @Override
+    public Integer delStatus(String loginName) {
+        return adminDao.updateStatus(loginName,2);
     }
 }

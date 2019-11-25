@@ -25,6 +25,14 @@ public interface BrandDao {
     List<WxTabBrand> findPage(@Param("searchMap") WxTabBrand searchMap, @Param("page") Integer page, @Param("size") Integer size);
 
     /**
+     * 根据id查询数据
+     *
+     * @param id
+     * @return
+     */
+    WxTabBrand findById(Integer id);
+
+    /**
      * 查询数据总数据
      *
      * @return
