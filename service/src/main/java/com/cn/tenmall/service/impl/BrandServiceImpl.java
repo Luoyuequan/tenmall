@@ -19,9 +19,18 @@ public class BrandServiceImpl implements BrandService {
     public TenmallResult finAll() {
         List<WxTabBrand> wxTabBrands = brandDao.finAll();
         if (wxTabBrands == null) {
-            return TenmallResult.build(201, "查询失败");
+            return TenmallResult.build(0, "查询失败");
         }
         return TenmallResult.ok(wxTabBrands);
+    }
+
+    @Override
+    public TenmallResult findById(Integer id) {
+        WxTabBrand byId = brandDao.findById(id);
+        if (byId == null) {
+            TenmallResult.build(0, "查询失败");
+        }
+        return TenmallResult.ok(byId);
     }
 
     @Override
@@ -29,7 +38,7 @@ public class BrandServiceImpl implements BrandService {
 
         int update = brandDao.update(wxTabBrand);
         if (update < 1) {
-
+            TenmallResult.build(0, "修改失败");
         }
         return TenmallResult.ok();
     }
@@ -48,13 +57,23 @@ public class BrandServiceImpl implements BrandService {
         //查询总记录数
         int total = brandDao.total(searchMap);
         if (total == 0) {
-            return TenmallResult.build(201, "没有查询到对应的数据");
+            return TenmallResult.build(0, "没有查询到对应的数据");
         }
         PageObject<WxTabBrand> pageObject = new PageObject<>();
+        int startIndex = (page - 1) * size;
         pageObject.setTotal(total);
         //查询分页数据
-        List<WxTabBrand> row = brandDao.findPage(searchMap, page, size);
+        List<WxTabBrand> row = brandDao.findPage(searchMap, startIndex, size);
         pageObject.setRows(row);
         return TenmallResult.ok(pageObject);
+    }
+
+    @Override
+    public TenmallResult deleteById(Integer id) {
+        int i = brandDao.deleteById(id);
+        if (i > 0) {
+            return TenmallResult.ok();
+        }
+        return TenmallResult.build(0, "删除失败");
     }
 }

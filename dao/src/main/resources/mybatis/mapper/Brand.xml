@@ -19,6 +19,11 @@
             </if>
         </where>
     </sql>
+
+    <select id="findById" resultType="com.cn.tenmall.entity.WxTabBrand">
+        select * from wx_tab_brand where id=#{id}
+    </select>
+
     <!--分页查询+条件分页-->
     <select id="findPage" resultType="com.cn.tenmall.entity.WxTabBrand">
         select * from wx_tab_brand
