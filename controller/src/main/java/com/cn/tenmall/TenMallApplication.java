@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Administrator
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties
 @SpringBootApplication
 @MapperScan("com.cn.tenmall.dao")
+@EnableSwagger2
 public class TenMallApplication {
 
     public static void main(String[] args) {
@@ -19,5 +21,4 @@ public class TenMallApplication {
 //        springApplication.setAddCommandLineProperties(false);
         springApplication.run(args);
     }
-
 }

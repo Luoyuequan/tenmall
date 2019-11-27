@@ -6,5 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminDao extends BaseMapper<WxTabAdmin> {
-
+    /**
+     * 更改状态
+     * @param loginName
+     * @return
+     */
+    int updateStatus(String loginName,int status);
 }

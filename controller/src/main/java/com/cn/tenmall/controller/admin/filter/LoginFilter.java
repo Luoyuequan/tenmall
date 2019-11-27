@@ -11,10 +11,10 @@
 package com.cn.tenmall.controller.admin.filter;
 
 import javax.servlet.*;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * 〈一句话功能简述〉<br> 

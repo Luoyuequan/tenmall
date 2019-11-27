@@ -15,12 +15,12 @@ import com.cn.tenmall.service.admin.AdminService;
 import com.cn.tenmall.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈管理控制层〉
  *
  * @author Administrator
@@ -32,16 +32,48 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    /**
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping("login")
-    public Message adminLogin(@Param("username")String username, @Param("password")String password){
+    public Message adminLogin(@Param("username") String username, @Param("password") String password) {
+        if(NotValue(username,password)!=null){
+            return NotValue(username,password);
+        }
         WxTabAdmin admin = adminService.findByUserName(username);
-        if(admin!=null){
-            if((admin.getPassword()).equals(password.trim())){
-                return new Message("0","登录成功");
+        if (admin != null) {
+            if ((admin.getPassword()).equals(password.trim())) {
+                if (adminService.loginStatus(username) > 0) {
+                    return new Message("0", "登录成功");
+                }
             }
         }
-//        adminService.findAll();
-        return new Message("0","登录失败");
+        return new Message("0", "登录失败");
+    }
+
+    @PostMapping("logout")
+    public Message adminOut(@Param("username") String username) {
+        if(NotValue(username)!=null){
+            return NotValue(username);
+        }
+        if (adminService.logoutStatus(username) > 0) {
+            return new Message("0", "退出成功");
+        }
+        return new Message("0", "退出失败");
+    }
+
+    private Message NotValue(String username){
+        return NotValue(username,"");
+    }
+    private Message NotValue(String username,String password){
+        if (username == null) {
+            return new Message("0", "username不能没空");
+        } else if (password == null) {
+            return new Message("0", "password不能没空");
+        }
+        return null;
     }
 }
 

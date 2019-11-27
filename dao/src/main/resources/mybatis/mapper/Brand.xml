@@ -42,7 +42,8 @@
 
     <!--修改-->
     <update id="update">
-        update wx_tab_brand set name=#{name},image=#{image},letter=#{letter},seq=#{seq} where id=#{id}
+        update wx_tab_brand set name=#{name},image=#{image},letter=#{.0
+        },seq=#{seq} where id=#{id}
     </update>
 
     <!--新增-->
