@@ -21,5 +21,4 @@ public class TenMallApplication {
 //        springApplication.setAddCommandLineProperties(false);
         springApplication.run(args);
     }
-
 }
