@@ -102,11 +102,11 @@ public class WxTabBrandController {
                 String filename = file.getOriginalFilename();
                 String suffix = filename.substring(filename.lastIndexOf("."));
                 //图片存储的路径
-                String newMkdirs = "f:\\" + imgFile;
+                String newMkdirs = "f://" + imgFile;
                 //完整路径名称
-                newCompanyImagepath = newMkdirs + "\\" + picName + suffix;
+                newCompanyImagepath = newMkdirs + "//" + picName + suffix;
 
-                File newFile2 = new File("f:\\" + imgFile);
+                File newFile2 = new File("f://" + imgFile);
                 if (newFile2.mkdirs()) {
                     System.out.println("创建一个文件夹");
                 }
