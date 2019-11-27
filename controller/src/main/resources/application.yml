@@ -22,3 +22,4 @@ mybatis-plus:
 #    map-underscore-to-camel-case: true
 #    cache-enabled: false
   mapper-locations:  classpath:mybatis/mapper/*.xml
+logging.file:

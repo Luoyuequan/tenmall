@@ -39,7 +39,9 @@ public class AdminController {
      */
     @PostMapping("login")
     public Message adminLogin(@Param("username") String username, @Param("password") String password) {
-
+        if(NotValue(username,password)!=null){
+            return NotValue(username,password);
+        }
         WxTabAdmin admin = adminService.findByUserName(username);
         if (admin != null) {
             if ((admin.getPassword()).equals(password.trim())) {
