@@ -1,6 +1,7 @@
 package com.cn.tenmall.service.impl;
 
 import com.cn.tenmall.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +9,9 @@ import java.util.Map;
 
 /**
  * @author luoyuequan
- * @version 1.00
- * @ClassName OrderServiceImpl
  * @time 2019/11/22 16:56
  */
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -23,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List listInfo(Map data) {
+
         return null;
     }
 
