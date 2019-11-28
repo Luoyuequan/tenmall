@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WxTabRole {
-
+public class WxRoleAndWxMenu {
   private long id;
-  private String roleName;
-
+  private long roleId;
+  private long menuId;
 }
