@@ -60,8 +60,8 @@ public class BrandServiceImpl implements BrandService {
             return TenmallResult.build(0, "没有查询到对应的数据");
         }
         PageObject<WxTabBrand> pageObject = new PageObject<>();
-        int startIndex = (page - 1) * size;
         pageObject.setTotal(total);
+        int startIndex = (page - 1) * size;
         //查询分页数据
         List<WxTabBrand> row = brandDao.findPage(searchMap, startIndex, size);
         pageObject.setRows(row);

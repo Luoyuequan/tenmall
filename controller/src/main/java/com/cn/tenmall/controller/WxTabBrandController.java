@@ -1,6 +1,6 @@
 package com.cn.tenmall.controller;
 
-import com.alibaba.fastjson.JSONObject;
+
 import com.cn.tenmall.entity.WxTabBrand;
 import com.cn.tenmall.service.BrandService;
 import com.cn.tenmall.vo.TenmallResult;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.io.*;
 import java.util.UUID;
 

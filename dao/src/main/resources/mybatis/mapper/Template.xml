@@ -3,11 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.tenmall.dao.TemplateDao">
+    <!--新增-->
     <insert id="add">
-        insert into wx_tab_template (`name`,`spec_num`,`para_num`) values (#{name},#{spec_num},#{para_num})
+        insert into wx_tab_template (`name`,`spec_num`,`para_num`) values (#{name},0,0)
     </insert>
-
-    <select id="findAll" resultType="java.util.Map">
+    <!-- 查询所有-->
+    <select id="findAll" resultType="com.cn.tenmall.entity.TemplateEntity">
         select * from wx_tab_template
     </select>
+    <!-- 修改-->
+    <update id="update">
+        update wx_tab_template set name=#{name},spec_num=#{specNum},para_num=#{paraNum} where id=#{id}
+    </update>
+
+    <sql id="queryWhere">
+        where name=#{name}
+    </sql>
+    <!-- 分页查询-->
+    <select id="find" resultType="com.cn.tenmall.entity.TemplateEntity">
+        select * from wx_tab_template
+        <include refid="queryWhere"/>
+        limit #{page},#{size}
+    </select>
+    <!-- 查询所有-->
+    <select id="total" resultType="int">
+        select count(*) from wx_tab_template
+        <include refid="queryWhere"/>
+    </select>
+    <!-- 删除-->
+    <delete id="deleteById">
+        delete from wx_tab_template where id=#{id}
+    </delete>
 </mapper>
