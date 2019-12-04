@@ -8,9 +8,8 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.cn.tenmall.service.admin.Impl;
+package com.cn.tenmall.service.admin.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.entity.WxTabAdmin;
 import com.cn.tenmall.service.admin.AdminService;
