@@ -6,10 +6,8 @@ import lombok.Data;
 public class TenmallResult {
 
     /**
-     * 响应状态码
-     * 200 成功
-     * 201 错误
-     * 400 参数错误
+     * 1:失败
+     * 0:成功
      */
     private Integer status;
 
@@ -18,6 +16,13 @@ public class TenmallResult {
 
     //响应中的数据
     private Object data;
+
+
+    public TenmallResult(Throwable e) {
+        this.status = 1;
+        this.msg = e.getMessage();
+
+    }
 
     public TenmallResult() {
 

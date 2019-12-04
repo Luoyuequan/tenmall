@@ -1,25 +1,40 @@
 package com.cn.tenmall.service.impl;
 
+import com.cn.tenmall.dao.ParaDao;
+import com.cn.tenmall.dao.SepcDao;
 import com.cn.tenmall.dao.TemplateDao;
 import com.cn.tenmall.entity.TemplateEntity;
+import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.TemplateService;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.vo.PageObject;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+
 public class TemplateServiceImpl implements TemplateService {
     @Autowired
     public TemplateDao templateDao;
+    @Autowired
+    public ParaDao paraDao;
+    @Autowired
+    public SepcDao sepcDao;
 
     @Override
-    public TenmallResult add(TemplateEntity templateEntity) {
-        int i = templateDao.add(templateEntity);
+    public TenmallResult add(String name) {
+        //查询规格数量
+        //sepcDao.specTotalById()
+
+        TemplateEntity templateEntity = new TemplateEntity();
+        int i = templateDao.add(name);
         if (i < 1) {
             return TenmallResult.build(0, "新增失败");
         }
@@ -36,8 +51,10 @@ public class TemplateServiceImpl implements TemplateService {
     }
 
     @Override
-    public TenmallResult update(TemplateEntity templateEntity) {
-        int i = templateDao.update(templateEntity);
+    public TenmallResult update(Integer id, String name) {
+
+        TemplateEntity templateEntity = new TemplateEntity();
+        int i = templateDao.update(id, name);
         if (i < 1) {
             return TenmallResult.build(1, "修改失败");
         }
@@ -66,50 +83,19 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public TenmallResult deleteById(Integer id) {
         int i = templateDao.deleteById(id);
-        if (i < 1) {
+        System.out.println(i);
+        if (i <= 0) {
             return TenmallResult.build(1, "删除失败");
         }
         return TenmallResult.ok();
     }
 
-
-    //    @Override
-//    public Map add(Map map) {
-//        String spec_num = "0";
-//        String para_num = "0";
-//        if (map.get("spec_num")!=null){
-//            spec_num = (String) map.get("spec_num");
-//        }
-//        if (map.get("para_num")!=null){
-//            para_num = (String) map.get("para_num");
-//        }
-//        int i = dao.add((String) map.get("name"),spec_num,para_num);
-//        Map result = new HashMap();
-//        if (i==1){
-//            result.put("code",0);
-//            result.put("message","保存成功");
-//        }else {
-//            result.put("code",1);
-//            result.put("message","保存失败");
-//        }
-//        System.out.println(i);
-//        return map;
-//    }
-//
-//    @Override
-//    public List<Map> findAll() {
-//        return dao.findAll();
-//    }
-//
-//    @Override
-//    public Map find(Map map) {
-//        Map<String, List<TemplateEntity>> map1 = new HashMap<>();
-//        List<TemplateEntity> list = dao.find();
-//        map1.put("rows",list);
-////        map1.put("total",);
-//
-//        return null;
-//    }
-
-
+    @Override
+    public TenmallResult findName(Integer id) {
+        String name = templateDao.findName(id);
+        if (StringUtils.isEmpty(name)) {
+            throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
+        }
+        return TenmallResult.ok(name);
+    }
 }

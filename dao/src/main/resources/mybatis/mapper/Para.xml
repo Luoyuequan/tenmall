@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.tenmall.dao.ParaDao">
+    <resultMap id="BaseResultMap" type="com.cn.tenmall.entity.ParaEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="options" property="options" jdbcType="VARCHAR"/>
+        <result column="seq" property="seq" jdbcType="BIGINT"/>
+        <result column="template_id" property="templateId" jdbcType="BIGINT"/>
+    </resultMap>
+    <insert id="add">
+        insert into wx_tab_para (name, options, seq, template_id)
+        values (#{name}, #{options}, #{seq}, #{templateId})
+    </insert>
+
+    <update id="update">
+        update wx_tab_para
+        set name=#{name},
+            options=#{options},
+            seq=#{seq},
+            template_id=#{templateId}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from wx_tab_para
+        where id = #{id}
+    </delete>
+    <sql id="queryWhere">
+        <where>
+            <if test="name!=null and name!='' or options!=null and options!=''">
+                name=#{name} and options=#{options}
+            </if>
+        </where>
+    </sql>
+    <select id="findCondPage" resultMap="BaseResultMap">
+        select * from wx_tab_para
+        <include refid="queryWhere"/>
+        limit #{page},#{size}
+    </select>
+    <select id="total" resultType="int">
+        select count(*) from wx_tab_para
+        <include refid="queryWhere"/>
+    </select>
+
+    <select id="paraTotalById" resultType="int">
+        select count(*)
+        from wx_tab_para
+        where template_id = #{templateId}
+    </select>
+</mapper>

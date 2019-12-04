@@ -3,6 +3,7 @@ package com.cn.tenmall.controller;
 
 import com.cn.tenmall.entity.TemplateEntity;
 import com.cn.tenmall.service.TemplateService;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -33,11 +34,11 @@ public class TemplateController {
      * @return
      */
     @RequestMapping(value = "add")
-    public TenmallResult add(TemplateEntity templateEntity) {
-        if (templateEntity == null || StringUtils.isEmpty(templateEntity.getName())) {
+    public TenmallResult add(String name) {
+        if (StringUtils.isEmpty(name)) {
             return TenmallResult.build(1, "参数不能为空");
         }
-        return service.add(templateEntity);
+        return service.add(name);
     }
 
     /**
@@ -57,11 +58,11 @@ public class TemplateController {
      * @return
      */
     @RequestMapping("update")
-    public TenmallResult update(TemplateEntity templateEntity) {
-        if (templateEntity == null || templateEntity.getId() == null) {
+    public TenmallResult update(Integer id, String name) {
+        if (StringUtils.isEmpty(name)) {
             return TenmallResult.build(1, "参数不能为空");
         }
-        return service.update(templateEntity);
+        return service.update(id, name);
     }
 
     /**
@@ -70,20 +71,34 @@ public class TemplateController {
      * @param
      * @return
      */
-    @RequestMapping(value = "find", method = RequestMethod.GET)
+    @RequestMapping(value = "find")
     public TenmallResult find(Integer page, Integer size, String name) {
 //        return service.find(map);
-        if (page == null || page == 0 || size == null || StringUtils.isEmpty(name)) {
+        if (page == null || page == 0 || size == null) {
             return TenmallResult.build(1, "参数不能为空");
         }
         return service.find(page, size, name);
     }
 
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("delete")
     public TenmallResult delete(Integer id) {
         if (id == null) {
             return TenmallResult.build(1, "参数不能为空");
         }
         return service.deleteById(id);
+    }
+
+    @RequestMapping("findName")
+    public TenmallResult findName(Integer id) {
+        if (id == null || id == 0) {
+            throw new ServiceException("参数错误");
+        }
+        return service.findName(id);
     }
 }

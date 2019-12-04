@@ -11,15 +11,18 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰
+
 mybatis-plus:
   type-aliases-package: com.cn.tenmall.entity
   global-config:
     refresh: true
     db-config:
       db-type: mysql
-#  configuration:
+    #  configuration:
     #数据库字段与数据对象字段的映射策略
-#    map-underscore-to-camel-case: true
-#    cache-enabled: false
+  #    map-underscore-to-camel-case: true
+  #    cache-enabled: false
   mapper-locations:  classpath:mybatis/mapper/*.xml
 

@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("CustomFilter doFilter before.");
+//        System.out.println("CustomFilter doFilter before.");
         HttpServletRequest req= (HttpServletRequest) request;
         HttpServletResponse resp= (HttpServletResponse) response;
         response.setContentType("text/html");
@@ -40,12 +40,12 @@ public class LoginFilter implements Filter {
 //               resp.sendRedirect("/");
 //        }
         filterChain.doFilter(request, response);
-        System.out.println("CustomFilter doFilter after.");
+//        System.out.println("CustomFilter doFilter after.");
     }
 
     @Override
     public void destroy() {
 
-        System.out.println("destroy.");
+//        System.out.println("destroy.");
     }
 }

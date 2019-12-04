@@ -3,24 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.tenmall.dao.TemplateDao">
+    <resultMap id="BaseResultMap" type="com.cn.tenmall.entity.TemplateEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="spec_num" property="specNum" jdbcType="BIGINT"/>
+        <result column="para_num" property="paraNum" jdbcType="BIGINT"/>
+
+    </resultMap>
     <!--新增-->
     <insert id="add">
-        insert into wx_tab_template (`name`,`spec_num`,`para_num`) values (#{name},0,0)
+        insert into wx_tab_template (`name`, `spec_num`, `para_num`)
+        values (#{name}, 0, 0)
     </insert>
     <!-- 查询所有-->
     <select id="findAll" resultType="com.cn.tenmall.entity.TemplateEntity">
-        select * from wx_tab_template
+        select *
+        from wx_tab_template
     </select>
     <!-- 修改-->
     <update id="update">
-        update wx_tab_template set name=#{name},spec_num=#{specNum},para_num=#{paraNum} where id=#{id}
+        update wx_tab_template
+        set name=#{name}
+        where id = #{id}
     </update>
 
     <sql id="queryWhere">
-        where name=#{name}
+        <if test="name!=null and name!=''">
+            <where>name=#{name}</where>
+        </if>
     </sql>
     <!-- 分页查询-->
-    <select id="find" resultType="com.cn.tenmall.entity.TemplateEntity">
+    <select id="find" resultMap="BaseResultMap">
         select * from wx_tab_template
         <include refid="queryWhere"/>
         limit #{page},#{size}
@@ -32,6 +45,20 @@
     </select>
     <!-- 删除-->
     <delete id="deleteById">
-        delete from wx_tab_template where id=#{id}
+        delete
+        from wx_tab_template
+        where id = #{id}
     </delete>
+    <!-- 根据id查询name-->
+    <select id="findName" resultType="string">
+        select name
+        from wx_tab_template
+        where id = #{id}
+    </select>
+
+    <update id="updatesSpecNum">
+        update wx_tab_template
+        set spec_num=#{specNum}
+        where id = #{id}
+    </update>
 </mapper>

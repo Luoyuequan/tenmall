@@ -13,7 +13,7 @@ public interface TemplateDao {
      *
      * @return
      */
-    int add(TemplateEntity templateEntity);
+    int add(String name);
 
     /**
      * 查询所有
@@ -25,10 +25,9 @@ public interface TemplateDao {
     /**
      * 修改
      *
-     * @param templateEntity
      * @return
      */
-    int update(TemplateEntity templateEntity);
+    int update(@Param("id") Integer id, @Param("name") String name);
 
     /**
      * 查询总记录数
@@ -54,4 +53,21 @@ public interface TemplateDao {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 根据id查询模板名称
+     *
+     * @param id
+     * @return
+     */
+    String findName(Integer id);
+
+    /**
+     * 根据id修改规格数量
+     *
+     * @param id
+     * @param specNum
+     * @return
+     */
+    int updatesSpecNum(@Param("id") Integer id, @Param("specNum") Integer specNum);
 }

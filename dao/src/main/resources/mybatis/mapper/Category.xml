@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.tenmall.dao.CategoryDao">
+
+    <resultMap id="BaseResultMap" type="com.cn.tenmall.entity.CategoryEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="goods_num" property="goodsNum" jdbcType="BIGINT"/>
+        <result column="is_show" property="isShow" jdbcType="VARCHAR"/>
+        <result column="is_menu" property="isMenu" jdbcType="VARCHAR"/>
+        <result column="seq" property="seq" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="template_id" property="templateId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="add">
+        insert into wx_tab_category (name, goods_num, is_show, is_menu, seq, parent_id, template_id)
+        values (#{name}, #{goodsNum}, #{isShow}, #{isMenu}, #{seq}, #{parentId}, #{templateId})
+    </insert>
+
+    <update id="update">
+        update wx_tab_category
+        set name=#{name},
+            goods_num=#{goodsNum},
+            is_show=#{isShow},
+            is_menu=#{isMenu},
+            seq=#{seq},
+            parent_id=#{parentId},
+            template_id=#{templateId}
+        where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from wx_tab_category
+    </select>
+
+    <select id="findByParentId" resultMap="BaseResultMap">
+        select *
+        from wx_tab_category
+        where parent_id = #{parentId}
+    </select>
+
+    <delete id="deleteById">
+        delete
+        from wx_tab_category
+        where id = #{id}
+    </delete>
+</mapper>

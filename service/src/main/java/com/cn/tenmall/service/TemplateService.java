@@ -12,7 +12,7 @@ public interface TemplateService {
     /**
      * 新增
      */
-    TenmallResult add(TemplateEntity templateEntity);
+    TenmallResult add(String name);
 
     /**
      * 查询所有
@@ -24,11 +24,11 @@ public interface TemplateService {
     /**
      * 修改
      *
-     * @param templateEntity
+     * @param
      * @return
      */
 
-    TenmallResult update(TemplateEntity templateEntity);
+    TenmallResult update(Integer id, String name);
 
     /**
      * 模板条件分页查询
@@ -47,4 +47,12 @@ public interface TemplateService {
      * @return
      */
     TenmallResult deleteById(Integer id);
+
+    /**
+     * 根据id查询模板名称
+     *
+     * @param id
+     * @return
+     */
+    TenmallResult findName(Integer id);
 }
