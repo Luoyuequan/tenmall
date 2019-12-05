@@ -14,9 +14,9 @@ import com.cn.tenmall.entity.WxTabAdmin;
 import com.cn.tenmall.service.admin.AdminService;
 import com.cn.tenmall.vo.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,7 +38,7 @@ public class AdminController {
      * @return
      */
     @PostMapping("login")
-    public Message adminLogin(@Param("username") String username, @Param("password") String password) {
+    public Message adminLogin(@RequestParam String username, @RequestParam String password) {
         if(NotValue(username,password)!=null){
             return NotValue(username,password);
         }
@@ -54,7 +54,7 @@ public class AdminController {
     }
 
     @PostMapping("logout")
-    public Message adminOut(@Param("username") String username) {
+    public Message adminOut(@RequestParam String username) {
         if(NotValue(username)!=null){
             return NotValue(username);
         }
