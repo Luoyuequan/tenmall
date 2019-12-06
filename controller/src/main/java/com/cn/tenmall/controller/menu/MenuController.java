@@ -12,15 +12,13 @@ package com.cn.tenmall.controller.menu;
 
 import com.cn.tenmall.entity.WxTabMenu;
 import com.cn.tenmall.service.menu.MenuService;
-import com.cn.tenmall.vo.Message;
+import com.cn.tenmall.vo.TenmallResult;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -45,63 +43,56 @@ public class MenuController {
      */
 
     @PostMapping("findCondMenu")
-    public List<WxTabMenu> findCondMenu(@RequestParam("name")String name, @RequestParam("page")Integer current, @RequestParam("size")Integer size){
-        List<WxTabMenu> all = menuService.findAll(name, current, size);
-        return all;
+    public TenmallResult findCondMenu(@RequestParam("name")String name, @RequestParam("page")Integer current, @RequestParam("size")Integer size){
+         return menuService.findCondMenu(name, current, size);
     }
 
     /**
      * 获取所有菜单列表接口
-     * @param name 菜单名称
      * @return
      */
     @PostMapping("findAllMenu")
-    public List<WxTabMenu> findAllMenu(@RequestParam("name")String name){
-        List<WxTabMenu> all = menuService.findAll(name);
-        return all;
+    public TenmallResult findAllMenu(){
+        return menuService.findAllMenu();
     }
 
     /**
      * 获取权限范围内菜单列表接口
-     * @param name
      * @return
      */
     @PostMapping("findAuthMenu")
-    public List<WxTabMenu> findAuthMenu(@RequestParam("name")String name){
-        List<WxTabMenu> all = menuService.findAll(name);
-        return all;
+    public TenmallResult findAuthMenu(){
+        return null;
     }
 
     /**
      * 菜单新增接口
+     * @param menu 菜单对象
      * @return
      */
     @PostMapping("add")
-    public Message add(WxTabMenu menu){
-        if(menuService.save(menu)){
-            return new Message("0","新增成功");
-        }
-        return new Message("0","新增失败");
+    public TenmallResult add(WxTabMenu menu){
+        return menuService.save(menu);
     }
 
     /**
-     * 菜单新增接口
+     * 菜单修改接口
+     * @param menu 菜单对象
      * @return
      */
     @PostMapping("update")
-    public Message update(WxTabMenu menu){
-        if(menuService.modify(menu)){
-            return new Message("0","修改成功");
-        }
-        return new Message("0","修改失败");
+    public TenmallResult update(WxTabMenu menu){
+        return menuService.modify(menu);
     }
-    @PostMapping("delete")
-    public Message delete(@RequestParam("id") Long id){
 
-        if(menuService.delete(id)){
-            return new Message("0","删除成功");
-        }
-        return new Message("0","删除失败");
+    /**
+     * 菜单删除接口
+     * @param id id
+     * @return
+     */
+    @PostMapping("delete")
+    public TenmallResult delete(@RequestParam Long id){
+        return menuService.delete(id);
     }
 
 }

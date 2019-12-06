@@ -12,14 +12,12 @@ package com.cn.tenmall.controller.role;
 
 import com.cn.tenmall.entity.WxTabRole;
 import com.cn.tenmall.service.role.RoleService;
-import com.cn.tenmall.vo.Message;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -41,11 +39,8 @@ public class RoleController {
      * @return
      */
     @PostMapping("add")
-    public Message add(WxTabRole role){
-        if(roleService.save(role)){
-            return new Message("0","新增成功");
-        }
-        return new Message("0","新增成功");
+    public TenmallResult add(WxTabRole role){
+        return roleService.save(role);
     }
 
     /**
@@ -54,11 +49,9 @@ public class RoleController {
      * @return
      */
     @PostMapping("update")
-    public Message update(WxTabRole role){
-        if(roleService.modify(role)) {
-            return new Message("0", "修改成功");
-        }
-        return new Message("0","修改失败");
+    public TenmallResult update(WxTabRole role){
+
+        return roleService.modify(role);
     }
 
     /**
@@ -67,11 +60,8 @@ public class RoleController {
      * @return
      */
     @PostMapping("delete")
-    public Message delete(@RequestParam("id") Long id){
-        if(roleService.remove(id)) {
-            return new Message("0", "删除成功");
-        }
-        return new Message("0","删除失败");
+    public TenmallResult delete(@RequestParam Long id){
+        return roleService.remove(id);
     }
 
     /**
@@ -79,7 +69,7 @@ public class RoleController {
      * @return
      */
     @PostMapping("findAll")
-    public List<WxTabRole> findAll(){
+    public TenmallResult findAll(){
         return roleService.findAll();
     }
 

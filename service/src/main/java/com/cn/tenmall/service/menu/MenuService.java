@@ -1,14 +1,14 @@
 package com.cn.tenmall.service.menu;
 
 import com.cn.tenmall.entity.WxTabMenu;
+import com.cn.tenmall.vo.TenmallResult;
 
 import java.io.Serializable;
-import java.util.List;
 
 public interface MenuService {
-    List<WxTabMenu> findAll(String name);
-    List<WxTabMenu> findAll(String name, Integer current, Integer size);
-    Boolean save(WxTabMenu menu);
-    Boolean modify(WxTabMenu menu);
-    Boolean delete(Serializable id);
+    TenmallResult findCondMenu(String name, Integer current, Integer size);
+    TenmallResult findAllMenu();
+    TenmallResult save(WxTabMenu menu);
+    TenmallResult modify(WxTabMenu menu);
+    TenmallResult delete(Serializable id);
 }

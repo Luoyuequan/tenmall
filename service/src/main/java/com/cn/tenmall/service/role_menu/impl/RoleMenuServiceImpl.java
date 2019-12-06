@@ -13,7 +13,11 @@ package com.cn.tenmall.service.role_menu.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.tenmall.dao.RoleMenuDao;
 import com.cn.tenmall.entity.WxRoleAndWxMenu;
+import com.cn.tenmall.enumClass.MessageEnum;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.service.role_menu.RoleMenuService;
+import com.cn.tenmall.vo.TenmallResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,29 +30,32 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RoleMenuServiceImpl implements RoleMenuService {
-    private final RoleMenuDao roleMenuDao;
-
-    public RoleMenuServiceImpl(RoleMenuDao roleMenuDao) {
-        this.roleMenuDao = roleMenuDao;
-    }
+    @Autowired
+    private RoleMenuDao roleMenuDao;
 
     @Override
-    public boolean save(WxRoleAndWxMenu roleAndWxMenu) {
-        WxRoleAndWxMenu w=new WxRoleAndWxMenu();
+    public TenmallResult save(WxRoleAndWxMenu roleAndWxMenu) {
         QueryWrapper<WxRoleAndWxMenu> queryWrapper=getQWrapper(roleAndWxMenu);
         if(roleMenuDao.selectList(queryWrapper).size()>0){
-            return false;
+            return TenmallResult.build(1,"已存在");
         }
-        return roleMenuDao.insert(roleAndWxMenu) > 0;
+            if(roleMenuDao.insert(roleAndWxMenu)>0){
+                return TenmallResult.ok();
+            }
+            throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
+
     }
 
     @Override
-    public boolean remove(WxRoleAndWxMenu roleAndWxMenu) {
+    public TenmallResult remove(WxRoleAndWxMenu roleAndWxMenu) {
         QueryWrapper<WxRoleAndWxMenu> queryWrapper=getQWrapper(roleAndWxMenu);
         if(roleMenuDao.selectList(queryWrapper).size()==0){
-            return false;
+            return TenmallResult.build(1,"不存在");
         }
-        return roleMenuDao.delete(queryWrapper)>0;
+        if(roleMenuDao.delete(queryWrapper)>0){
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }
 
     private QueryWrapper<WxRoleAndWxMenu> getQWrapper(WxRoleAndWxMenu roleAndWxMenu){

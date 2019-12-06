@@ -1,3 +1,4 @@
+package com.cn.tenmall.service.admin.Impl;
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: AdminServiceImpl
@@ -8,17 +9,18 @@
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.cn.tenmall.service.admin.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.entity.WxTabAdmin;
+import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.admin.AdminService;
+import com.cn.tenmall.service.exception.ServiceException;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -32,48 +34,65 @@ import java.util.Map;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminDao adminDao;
-    @Override
-    public List<WxTabAdmin> findAll() {
-        List<WxTabAdmin> list=adminDao.selectList(null);
-        return list;
-    }
 
     @Override
-    public WxTabAdmin findByUserName(String loginName) {
-        Map<String,Object> m = new HashMap<>();
-        m.put("login_name",loginName);
-        WxTabAdmin w= adminDao.selectByMap(m).get(0);
-        if(w!=null){
-            return w;
+    public TenmallResult login(String username, String password) {
+        WxTabAdmin admin = findByUserName(username);
+        if (admin != null) {
+            if ((admin.getPassword()).equals(password.trim())) {
+                admin.setStatus(1);
+                if (adminDao.updateById(admin) > 0) {
+                    return TenmallResult.build(0,"登录成功");
+                }
+                throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
+            }
+            return TenmallResult.build(0,"密码错误");
         }
-        return null;
+        return TenmallResult.build(0,"用户名错误");
     }
 
-    /**
-     * 更改为登录状态
-     * @param loginName
-     * @return
-     */
     @Override
-    public Integer loginStatus(String loginName) {
-        return adminDao.updateStatus(loginName,0);
+    public TenmallResult out(String username) {
+        WxTabAdmin admin = findByUserName(username);
+        if(admin!=null){
+            admin.setStatus(2);
+            if (adminDao.updateById(admin) > 0) {
+                return TenmallResult.ok();
+            }
+            throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
+        }
+        return TenmallResult.build(0,"用户名错误");
+    }
+    @Override
+    public TenmallResult save(WxTabAdmin admin) {
+        if(adminDao.insert(admin)>0){
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
+    }
+    @Override
+    public TenmallResult modify(WxTabAdmin admin) {
+        if(adminDao.updateById(admin)>0){
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
+    }
+
+    @Override
+    public TenmallResult delete(Serializable id) {
+        if(adminDao.deleteById(id)>0){
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
     /**
-     * 更改为冻结状态
-     * @param loginName
+     * 根据username获取对象
+     * @param username 管理员名
      * @return
      */
-    @Override
-    public Integer logoutStatus(String loginName) {
-        return adminDao.updateStatus(loginName,1);
-    }
-    /**
-     * 更改为删除状态
-     * @param loginName
-     * @return
-     */
-    @Override
-    public Integer delStatus(String loginName) {
-        return adminDao.updateStatus(loginName,2);
+    private WxTabAdmin findByUserName(String username) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("login_name",username);
+        return (WxTabAdmin) adminDao.selectList(queryWrapper).get(0);
     }
 }
