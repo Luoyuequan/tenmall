@@ -1,21 +1,14 @@
 package com.cn.tenmall.controller;
 
 
-import com.cn.tenmall.entity.TemplateEntity;
 import com.cn.tenmall.service.TemplateService;
 import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 模板管理

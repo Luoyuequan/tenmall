@@ -9,7 +9,7 @@ import lombok.Data;
  * @author 罗跃权
  */
 @Data
-public class WxTabOrderLog {
+public class WxTabOrderLogEntity {
 
     private Integer id;
     private String operater;

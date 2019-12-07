@@ -5,10 +5,10 @@ import lombok.Data;
 /**
  * 订单主表
  *
- * @author luo
+ * @author luoyuequan
  */
 @Data
-public class WxTabOrder {
+public class WxTabOrderEntity {
 
     private Integer id;
     private Integer totalNum;
@@ -16,7 +16,7 @@ public class WxTabOrder {
     private Integer preMoney;
     private Integer postFee;
     private Integer payMoney;
-    private String payType;
+    private Integer payType;
     private java.sql.Timestamp createTime;
     private java.sql.Timestamp updateTime;
     private java.sql.Timestamp payTime;
@@ -27,15 +27,14 @@ public class WxTabOrder {
     private String shippingCode;
     private String username;
     private String buyerMessage;
-    private String buyerRate;
+    private Integer buyerRate;
     private String receiverContact;
     private String receiverMobile;
     private String receiverAddress;
-    private String sourceType;
+    private Integer sourceType;
     private Integer tansactionId;
-    private String orderStatus;
-    private String payStatus;
-    private String consignStatus;
-    private String isDelete;
-
+    private Integer orderStatus;
+    private Integer payStatus;
+    private Integer consignStatus;
+    private Integer isDelete;
 }

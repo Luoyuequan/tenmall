@@ -11,7 +11,7 @@ import java.util.Date;
  * @author 罗跃权
  */
 @Data
-public class WxTabCategoryReport {
+public class WxTabCategoryReportEntity {
 
     private Integer categoryId1;
     private Integer categoryId2;

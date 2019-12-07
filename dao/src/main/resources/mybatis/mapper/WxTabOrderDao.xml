@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.tenmall.dao.WxTabOrderDao">
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into wx_tab_order (total_num, total_money,
+                                  pre_money, post_fee, pay_money,
+                                  pay_type, create_time, update_time,
+                                  pay_time, consign_time, end_time,
+                                  close_time, shipping_name, shipping_code,
+                                  username, buyer_message, buyer_rate,
+                                  receiver_contact, receiver_mobile, receiver_address,
+                                  source_type, tansaction_id, order_status,
+                                  pay_status, consign_status)
+        values (#{totalNum,jdbcType=INTEGER}, #{totalMoney,jdbcType=INTEGER},
+                #{preMoney,jdbcType=INTEGER}, #{postFee,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
+                #{payType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+                #{payTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+                #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR},
+                #{username,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerRate,jdbcType=TINYINT},
+                #{receiverContact,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR},
+                #{receiverAddress,jdbcType=VARCHAR},
+                #{sourceType,jdbcType=TINYINT}, #{tansactionId,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT},
+                #{payStatus,jdbcType=TINYINT}, #{consignStatus,jdbcType=TINYINT})
+    </insert>
+    <update id="updateById">
+        update wx_tab_order
+        <set>
+            <if test="totalNum != null">
+                total_num = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalMoney != null">
+                total_money = #{totalMoney,jdbcType=INTEGER},
+            </if>
+            <if test="preMoney != null">
+                pre_money = #{preMoney,jdbcType=INTEGER},
+            </if>
+            <if test="postFee != null">
+                post_fee = #{postFee,jdbcType=INTEGER},
+            </if>
+            <if test="payMoney != null">
+                pay_money = #{payMoney,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="consignTime != null">
+                consign_time = #{consignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closeTime != null">
+                close_time = #{closeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shippingName != null">
+                shipping_name = #{shippingName,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingCode != null">
+                shipping_code = #{shippingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerMessage != null">
+                buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="buyerRate != null">
+                buyer_rate = #{buyerRate,jdbcType=TINYINT},
+            </if>
+            <if test="receiverContact != null">
+                receiver_contact = #{receiverContact,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverAddress != null">
+                receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="tansactionId != null">
+                tansaction_id = #{tansactionId,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=TINYINT},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus,jdbcType=TINYINT},
+            </if>
+            <if test="consignStatus != null">
+                consign_status = #{consignStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

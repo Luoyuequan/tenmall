@@ -8,7 +8,7 @@ import lombok.Data;
  * @author 罗跃权
  */
 @Data
-public class WxTabReturnOrder {
+public class WxTabReturnOrderEntity {
 
     private String id;
     private String orderId;

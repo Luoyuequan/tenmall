@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.tenmall.dao.PublicDao">
+    <sql id="All_Column_List">*</sql>
+    <sql id="whereColumn">where `column` = `value`</sql>
+    <select id="findAllOfPageModel">
+        select
+        <include refid="All_Column_List"/>
+        from ${tableName}
+        <if test="offset != null and limit != null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+    <select id="findByColumnForOnlyValue">
+        select
+        <include refid="All_Column_List"/>
+        from ${tableName}
+        <include refid="whereColumn">
+            <property name="column" value="${whereColumn}"/>
+            <property name="value" value="#{whereValue}"/>
+        </include>
+    </select>
+    <delete id="physicalDeleteByColumnForOnlyValue">
+        delete
+        from ${tableName}
+        <include refid="whereColumn">
+            <property name="column" value="${whereColumn}"/>
+            <property name="value" value="#{whereValue}"/>
+        </include>
+    </delete>
+    <update id="updateSingleColumnByColumnForOnlyValue">
+        update ${tableName}
+        set ${updateColumn} = #{updateValue}
+        <include refid="whereColumn">
+            <property name="column" value="${whereColumn}"/>
+            <property name="value" value="#{whereValue}"/>
+        </include>
+    </update>
+</mapper>

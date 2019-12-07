@@ -9,7 +9,7 @@ import lombok.Data;
  * @author 罗跃权
  */
 @Data
-public class WxTabOrderConfig {
+public class WxTabOrderConfigEntity {
 
     private Integer id;
     private Integer orderTimeout;

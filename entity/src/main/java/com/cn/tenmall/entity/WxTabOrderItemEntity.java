@@ -8,7 +8,7 @@ import lombok.Data;
  * @author 罗跃权
  */
 @Data
-public class WxTabOrderItem {
+public class WxTabOrderItemEntity {
 
     private Integer id;
     private Integer categoryId1;

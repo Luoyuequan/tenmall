@@ -17,7 +17,7 @@ public class TenmallResult {
     //响应中的数据
     private Object data;
 
-
+    //错误调用
     public TenmallResult(Throwable e) {
         this.status = 1;
         this.msg = e.getMessage();

@@ -9,7 +9,7 @@ import lombok.Data;
  * @author 罗跃权
  */
 @Data
-public class WxTabReturnOrderItem {
+public class WxTabReturnOrderItemEntity {
 
     private String id;
     private String categoryId;
