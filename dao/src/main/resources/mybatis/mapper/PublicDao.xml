@@ -20,6 +20,15 @@
             <property name="value" value="#{whereValue}"/>
         </include>
     </select>
+    <select id="findByColumn">
+        select
+        <include refid="All_Column_List"/>
+        from ${tableName}
+        <include refid="whereColumn">
+            <property name="column" value="${whereColumn}"/>
+            <property name="value" value="#{whereValue}"/>
+        </include>
+    </select>
     <delete id="physicalDeleteByColumnForOnlyValue">
         delete
         from ${tableName}

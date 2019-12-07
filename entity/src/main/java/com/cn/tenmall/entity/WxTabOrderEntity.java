@@ -2,6 +2,8 @@ package com.cn.tenmall.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 订单主表
  *
@@ -37,4 +39,5 @@ public class WxTabOrderEntity {
     private Integer payStatus;
     private Integer consignStatus;
     private Integer isDelete;
+    private List<WxTabOrderItemEntity> wxTabOrderItemEntityList;
 }

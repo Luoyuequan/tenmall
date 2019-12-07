@@ -26,4 +26,5 @@ public class WxTabOrderItemEntity {
     private Integer weight;
     private Integer postFee;
     private String isReturn;
+
 }

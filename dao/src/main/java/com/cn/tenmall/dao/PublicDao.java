@@ -13,15 +13,31 @@ public interface PublicDao<T> {
      * 对于具有唯一值索引的列,作为查询条件时
      * 采用动态查询方式
      *
-     * @param tableName 表名
-     * @param column    列名
-     * @param value     参数值
+     * @param tableName   表名
+     * @param whereColumn 列名
+     * @param whereValue  参数值
      * @return 实体信息
      */
     T findByColumnForOnlyValue(
             @Param(value = "tableName") String tableName,
-            @Param(value = "column") String column,
-            @Param(value = "value") Object value
+            @Param(value = "whereColumn") String whereColumn,
+            @Param(value = "whereValue") Object whereValue
+    );
+
+    /**
+     * 对于非唯一值索引的列,作为查询条件时
+     * 获取信息集合
+     * 采用动态查询方式
+     *
+     * @param tableName   表名
+     * @param whereColumn 列名
+     * @param whereValue  参数值
+     * @return 实体信息集合
+     */
+    List<T> findByColumn(
+            @Param(value = "tableName") String tableName,
+            @Param(value = "whereColumn") String whereColumn,
+            @Param(value = "whereValue") Object whereValue
     );
 
     /**

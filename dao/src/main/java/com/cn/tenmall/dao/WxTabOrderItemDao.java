@@ -2,6 +2,8 @@ package com.cn.tenmall.dao;
 
 import com.cn.tenmall.entity.WxTabOrderItemEntity;
 
+import java.util.List;
+
 /**
  * @author luoyuequan
  * @time 2019/12/6 16:58
@@ -18,6 +20,17 @@ public interface WxTabOrderItemDao extends PublicDao<WxTabOrderItemEntity> {
      */
     default WxTabOrderItemEntity findById(WxTabOrderItemEntity wxTabOrderItemEntity) {
         return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderItemEntity.getId());
+    }
+
+    /**
+     * 根据订单主表id
+     * 查询订单详细表信息
+     *
+     * @param wxTabOrderItemEntity 订单详细表实体
+     * @return 订单详细表信息集合
+     */
+    default List<WxTabOrderItemEntity> findByOrderId(WxTabOrderItemEntity wxTabOrderItemEntity) {
+        return findByColumn(TABLE_NAME, "order_id", wxTabOrderItemEntity.getOrderId());
     }
 
     /**
