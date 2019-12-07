@@ -2,47 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cn.tenmall.dao.PublicDao">
     <sql id="All_Column_List">*</sql>
-    <sql id="whereColumn">where `column` = `value`</sql>
-    <select id="findAllOfPageModel">
+    <select id="findAllOfCommon">
         select
         <include refid="All_Column_List"/>
         from ${tableName}
-        <if test="offset != null and limit != null">
-            limit #{offset},#{limit}
-        </if>
+        <where>
+            <if test="${equalsColumn} != null and #{equalsValue} != null">
+                ${equalsColumn} = #{equalsValue}
+            </if>
+            <if test="${inColumn} != null and #{collection} != null">
+                <foreach item="item" index="index" collection="collection" open="${inColumn} in (" separator=","
+                         close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="offset != null and limit != null">
+                limit #{offset},#{limit}
+            </if>
+        </where>
     </select>
-    <select id="findByColumnForOnlyValue">
-        select
-        <include refid="All_Column_List"/>
-        from ${tableName}
-        <include refid="whereColumn">
-            <property name="column" value="${whereColumn}"/>
-            <property name="value" value="#{whereValue}"/>
-        </include>
-    </select>
-    <select id="findByColumn">
-        select
-        <include refid="All_Column_List"/>
-        from ${tableName}
-        <include refid="whereColumn">
-            <property name="column" value="${whereColumn}"/>
-            <property name="value" value="#{whereValue}"/>
-        </include>
-    </select>
-    <delete id="physicalDeleteByColumnForOnlyValue">
+    <delete id="physicalDeleteByColumn">
         delete
         from ${tableName}
-        <include refid="whereColumn">
-            <property name="column" value="${whereColumn}"/>
-            <property name="value" value="#{whereValue}"/>
-        </include>
+        <where>
+            <if test="${equalsColumn} != null and #{equalsValue} != null">
+                ${equalsColumn} = #{equalsValue}
+            </if>
+        </where>
     </delete>
     <update id="updateSingleColumnByColumnForOnlyValue">
         update ${tableName}
-        set ${updateColumn} = #{updateValue}
-        <include refid="whereColumn">
-            <property name="column" value="${whereColumn}"/>
-            <property name="value" value="#{whereValue}"/>
-        </include>
+        <set>
+            <if test="${updateColumn} != null and #{updateValue} != null">
+                ${updateColumn} = #{updateValue}
+            </if>
+        </set>
+        <where>
+            <if test="${equalsColumn} != null and #{equalsValue} != null">
+                ${equalsColumn} = #{equalsValue}
+            </if>
+        </where>
     </update>
 </mapper>

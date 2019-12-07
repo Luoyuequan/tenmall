@@ -49,4 +49,24 @@ public interface WxTabOrderItemDao extends PublicDao<WxTabOrderItemEntity> {
      * @return 修改结果 影响行数
      */
     int updateById(WxTabOrderItemEntity wxTabOrderItemEntity);
+
+    /**
+     * 删除订单详细表 根据id
+     *
+     * @param wxTabOrderItemEntity 订单详细表实体
+     * @return 删除结果 影响行数
+     */
+    default int deleteById(WxTabOrderItemEntity wxTabOrderItemEntity) {
+        return physicalDeleteByColumn(TABLE_NAME, "id", wxTabOrderItemEntity.getId());
+    }
+
+    /**
+     * 删除订单详细表 根据orderId
+     *
+     * @param wxTabOrderItemEntity 订单详细表实体
+     * @return 删除结果 影响行数
+     */
+    default int deleteByOrderId(WxTabOrderItemEntity wxTabOrderItemEntity) {
+        return physicalDeleteByColumn(TABLE_NAME, "order_id", wxTabOrderItemEntity.getOrderId());
+    }
 }

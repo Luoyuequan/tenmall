@@ -100,6 +100,9 @@
             <if test="consignStatus != null">
                 consign_status = #{consignStatus,jdbcType=TINYINT},
             </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
