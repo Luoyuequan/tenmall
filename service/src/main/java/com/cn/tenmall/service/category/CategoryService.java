@@ -1,4 +1,4 @@
-package com.cn.tenmall.service;
+package com.cn.tenmall.service.category;
 
 import com.cn.tenmall.entity.CategoryEntity;
 import com.cn.tenmall.vo.TenmallResult;
