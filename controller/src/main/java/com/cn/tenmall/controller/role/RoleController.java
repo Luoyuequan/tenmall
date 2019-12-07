@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈角色控制〉
@@ -39,7 +41,7 @@ public class RoleController {
      * @return
      */
     @PostMapping("add")
-    public TenmallResult add(WxTabRole role){
+    public TenmallResult add(@Valid WxTabRole role){
         return roleService.save(role);
     }
 
@@ -49,7 +51,7 @@ public class RoleController {
      * @return
      */
     @PostMapping("update")
-    public TenmallResult update(WxTabRole role){
+    public TenmallResult update(@Valid WxTabRole role){
 
         return roleService.modify(role);
     }

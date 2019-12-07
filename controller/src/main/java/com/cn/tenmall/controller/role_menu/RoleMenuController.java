@@ -11,12 +11,16 @@
 package com.cn.tenmall.controller.role_menu;
 
 import com.cn.tenmall.entity.WxRoleAndWxMenu;
+import com.cn.tenmall.enumClass.MessageEnum;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.service.role_menu.RoleMenuService;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -33,11 +37,12 @@ public class RoleMenuController {
     private  RoleMenuService roleMenuService;
 
     @PostMapping("add")
-    public TenmallResult add(WxRoleAndWxMenu roleAndWxMenu){
+    public TenmallResult add(@Valid WxRoleAndWxMenu roleAndWxMenu){
+
         return roleMenuService.save(roleAndWxMenu);
     }
     @PostMapping("delete")
-    public TenmallResult delete(WxRoleAndWxMenu roleAndWxMenu){
+    public TenmallResult delete(@Valid WxRoleAndWxMenu roleAndWxMenu){
         return roleMenuService.remove(roleAndWxMenu);
     }
 }

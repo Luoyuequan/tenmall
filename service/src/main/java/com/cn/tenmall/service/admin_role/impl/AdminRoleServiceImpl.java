@@ -11,7 +11,9 @@
 package com.cn.tenmall.service.admin_role.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.dao.AdminRoleDao;
+import com.cn.tenmall.dao.RoleDao;
 import com.cn.tenmall.entity.WxAdminAndWxRole;
 import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.admin_role.AdminRoleService;
@@ -32,6 +34,10 @@ import org.springframework.stereotype.Service;
 public class AdminRoleServiceImpl implements AdminRoleService {
     @Autowired
     private AdminRoleDao adminRoleDao;
+    @Autowired
+    private AdminDao adminDao;
+    @Autowired
+    private RoleDao roleDao;
     @Override
     public TenmallResult save(WxAdminAndWxRole adminAndRole) {
         WxAdminAndWxRole w=new WxAdminAndWxRole();
@@ -58,6 +64,9 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }
     private QueryWrapper<WxAdminAndWxRole> getQWrapper(WxAdminAndWxRole adminAndRole){
+        if(roleDao.selectById(adminAndRole.getRoleId())==null||adminDao.selectById(adminAndRole.getAdminId())==null){
+            throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
+        }
         QueryWrapper<WxAdminAndWxRole> queryWrapper=new QueryWrapper<WxAdminAndWxRole>();
         queryWrapper.eq("role_id",adminAndRole.getRoleId());
         queryWrapper.eq("admin_id",adminAndRole.getAdminId());

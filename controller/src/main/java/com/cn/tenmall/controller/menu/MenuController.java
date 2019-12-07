@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * 〈一句话功能简述〉<br> 
  * 〈菜单Controller〉
@@ -42,18 +44,18 @@ public class MenuController {
      * @return
      */
 
-    @PostMapping("findCondMenu")
-    public TenmallResult findCondMenu(@RequestParam("name")String name, @RequestParam("page")Integer current, @RequestParam("size")Integer size){
-         return menuService.findCondMenu(name, current, size);
+    @PostMapping("findCondPage")
+    public TenmallResult findCondPage(@RequestParam("name")String name, @RequestParam("page")Integer current, @RequestParam("size")Integer size){
+         return menuService.findCondPage(name, current, size);
     }
 
     /**
      * 获取所有菜单列表接口
      * @return
      */
-    @PostMapping("findAllMenu")
-    public TenmallResult findAllMenu(){
-        return menuService.findAllMenu();
+    @PostMapping("findAll")
+    public TenmallResult findAll(){
+        return menuService.findAll();
     }
 
     /**
@@ -61,8 +63,8 @@ public class MenuController {
      * @return
      */
     @PostMapping("findAuthMenu")
-    public TenmallResult findAuthMenu(){
-        return null;
+    public TenmallResult findAuthMenu(@RequestParam Long roleId){
+        return menuService.findAuthMenu(roleId);
     }
 
     /**
@@ -71,7 +73,7 @@ public class MenuController {
      * @return
      */
     @PostMapping("add")
-    public TenmallResult add(WxTabMenu menu){
+    public TenmallResult add(@Valid WxTabMenu menu){
         return menuService.save(menu);
     }
 
@@ -81,7 +83,7 @@ public class MenuController {
      * @return
      */
     @PostMapping("update")
-    public TenmallResult update(WxTabMenu menu){
+    public TenmallResult update(@Valid WxTabMenu menu){
         return menuService.modify(menu);
     }
 
