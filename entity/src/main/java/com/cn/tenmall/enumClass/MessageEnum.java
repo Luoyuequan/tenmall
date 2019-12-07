@@ -4,6 +4,8 @@ public enum MessageEnum {
     ADD_ERROR(1, "新增失败"),
     UPDATE_ERROR(1, "修改失败"),
     FIND_ERROR(1, "查询失败"),
+    LOGIN_ERROR(1,"用户名或密码错误"),
+
     DELETE_ERROR(1, "删除失败");
 
     //错误代码

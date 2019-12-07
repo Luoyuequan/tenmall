@@ -12,12 +12,14 @@ package com.cn.tenmall.controller.admin;
 
 import com.cn.tenmall.entity.WxTabAdmin;
 import com.cn.tenmall.service.admin.AdminService;
-import com.cn.tenmall.vo.Message;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -33,47 +35,54 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     /**
+     * 账号登录
      * @param username
      * @param password
      * @return
      */
     @PostMapping("login")
-    public Message adminLogin(@RequestParam String username, @RequestParam String password) {
-        if(NotValue(username,password)!=null){
-            return NotValue(username,password);
-        }
-        WxTabAdmin admin = adminService.findByUserName(username);
-        if (admin != null) {
-            if ((admin.getPassword()).equals(password.trim())) {
-                if (adminService.loginStatus(username) > 0) {
-                    return new Message("0", "登录成功");
-                }
-            }
-        }
-        return new Message("0", "登录失败");
+    public TenmallResult adminLogin(@RequestParam String username, @RequestParam String password) {
+        return adminService.login(username, password);
     }
 
+    /**
+     * 账号退出
+     * @param username
+     * @return
+     */
     @PostMapping("logout")
-    public Message adminOut(@RequestParam String username) {
-        if(NotValue(username)!=null){
-            return NotValue(username);
-        }
-        if (adminService.logoutStatus(username) > 0) {
-            return new Message("0", "退出成功");
-        }
-        return new Message("0", "退出失败");
+    public TenmallResult adminOut(@RequestParam String username) {
+        return adminService.out(username);
+    }
+    /**
+     * 管理员新增接口
+     * @param admin 管理员对象
+     * @return
+     */
+    @PostMapping("add")
+    public TenmallResult add(@Valid WxTabAdmin admin){
+        return adminService.save(admin);
     }
 
-    private Message NotValue(String username){
-        return NotValue(username,"");
+    /**
+     * 管理员修改接口
+     * @param admin 管理员对象
+     * @return
+     */
+    @PostMapping("update")
+    public TenmallResult update(@Valid WxTabAdmin admin){
+        return adminService.modify(admin);
     }
-    private Message NotValue(String username,String password){
-        if (username == null) {
-            return new Message("0", "username不能没空");
-        } else if (password == null) {
-            return new Message("0", "password不能没空");
-        }
-        return null;
+
+    /**
+     * 管理员删除接口
+     * @param id id
+     * @return
+     */
+    @PostMapping("delete")
+    public TenmallResult delete(@RequestParam Long id){
+        return adminService.delete(id);
     }
+
 }
 

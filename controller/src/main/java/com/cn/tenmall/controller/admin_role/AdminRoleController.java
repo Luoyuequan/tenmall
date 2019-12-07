@@ -1,17 +1,17 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
- * FileName: RoleMenuController
+ * FileName: AdminRoleController
  * Author:   Administrator
- * Date:     2019/11/28 14:24
- * Description: 角色和菜单关联表
+ * Date:     2019/12/6 15:47
+ * Description: 管理角色
  * History:
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-package com.cn.tenmall.controller.role_menu;
+package com.cn.tenmall.controller.admin_role;
 
-import com.cn.tenmall.entity.WxRoleAndWxMenu;
-import com.cn.tenmall.service.role_menu.RoleMenuService;
+import com.cn.tenmall.entity.WxAdminAndWxRole;
+import com.cn.tenmall.service.admin_role.AdminRoleService;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,24 +20,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 〈一句话功能简述〉<br> 
- * 〈角色和菜单关联表〉
+ * 〈管理角色〉
  *
  * @author Administrator
- * @create 2019/11/28
+ * @create 2019/12/6
  * @since 1.0.0
  */
 @RestController
-@RequestMapping("roleMenu")
-public class RoleMenuController {
+@RequestMapping("adminRole")
+public class AdminRoleController {
     @Autowired
-    private  RoleMenuService roleMenuService;
+    private AdminRoleService adminRoleService;
 
     @PostMapping("add")
-    public TenmallResult add(WxRoleAndWxMenu roleAndWxMenu){
-        return roleMenuService.save(roleAndWxMenu);
+    public TenmallResult add(WxAdminAndWxRole adminAndRole){
+        return adminRoleService.save(adminAndRole);
     }
     @PostMapping("delete")
-    public TenmallResult delete(WxRoleAndWxMenu roleAndWxMenu){
-        return roleMenuService.remove(roleAndWxMenu);
+    public TenmallResult delete(WxAdminAndWxRole adminAndRole){
+        return adminRoleService.remove(adminAndRole);
     }
 }

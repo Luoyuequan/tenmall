@@ -12,12 +12,14 @@ package com.cn.tenmall.service.role.impl;
 
 import com.cn.tenmall.dao.RoleDao;
 import com.cn.tenmall.entity.WxTabRole;
+import com.cn.tenmall.enumClass.MessageEnum;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.service.role.RoleService;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -32,31 +34,31 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
     @Override
-    public boolean save(WxTabRole role) {
+    public TenmallResult save(WxTabRole role) {
         if(roleDao.insert(role)>0){
-            return true;
+            return TenmallResult.ok();
         }
-        return false;
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
 
     @Override
-    public boolean modify(WxTabRole role) {
+    public TenmallResult modify(WxTabRole role) {
         if(roleDao.updateById(role)>0){
-            return true;
+            return TenmallResult.ok();
         }
-        return false;
+        throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
     }
 
     @Override
-    public boolean remove(Serializable id) {
+    public TenmallResult remove(Serializable id) {
         if(roleDao.deleteById(id)>0){
-            return true;
+            return TenmallResult.ok();
         }
-        return false;
+        throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }
 
     @Override
-    public List<WxTabRole> findAll() {
-        return roleDao.selectList(null);
+    public TenmallResult findAll() {
+        return TenmallResult.ok(roleDao.selectList(null));
     }
 }

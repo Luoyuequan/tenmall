@@ -5,7 +5,6 @@ import com.cn.tenmall.entity.CategoryEntity;
 import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.CategoryService;
 import com.cn.tenmall.service.exception.ServiceException;
-import com.cn.tenmall.vo.Message;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

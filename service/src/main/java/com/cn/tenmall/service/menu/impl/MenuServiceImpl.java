@@ -11,16 +11,18 @@
 package com.cn.tenmall.service.menu.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cn.tenmall.dao.MenuDao;
 import com.cn.tenmall.entity.WxTabMenu;
+import com.cn.tenmall.enumClass.MessageEnum;
+import com.cn.tenmall.service.exception.ServiceException;
 import com.cn.tenmall.service.menu.MenuService;
+import com.cn.tenmall.vo.PageObject;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -34,44 +36,42 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuDao menuDao;
-    public List<WxTabMenu> findAll(String name){
-        return findAll(name,null,null);
-    }
+
     @Override
-    public List<WxTabMenu> findAll(String name, Integer current, Integer size) {
+    public TenmallResult findCondMenu(String name, Integer current, Integer size) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.like("name",name);
-        List records=null;
-        if(current!=null&&size!=null){
-             IPage iPage= menuDao.selectPage(new Page(current, size), queryWrapper);
-             records=iPage.getRecords();
-        }else {
-             records = menuDao.selectList(queryWrapper);
-        }
-        return records;
+        return TenmallResult.ok(new PageObject<>(menuDao.selectCount(null),menuDao.selectPage(new Page(current, size), queryWrapper).getRecords()));
     }
 
     @Override
-    public Boolean save(WxTabMenu menu) {
+    public TenmallResult findAllMenu() {
+        return TenmallResult.ok(menuDao.selectList(null));
+    }
+
+    @Override
+    public TenmallResult save(WxTabMenu menu) {
         if(menuDao.insert(menu)>0){
-            return true;
+            return TenmallResult.ok();
         }
-        return false;
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
+    }
+    @Override
+    public TenmallResult modify(WxTabMenu menu) {
+        if(menuDao.updateById(menu)>0){
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
     }
 
     @Override
-    public Boolean modify(WxTabMenu menu) {
-        if (menuDao.updateById(menu)>0){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Boolean delete(Serializable id) {
+    public TenmallResult delete(Serializable id) {
         if(menuDao.deleteById(id)>0){
-            return true;
+            return TenmallResult.ok();
         }
-        return false;
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
+
+
+
 }
