@@ -1,4 +1,3 @@
-package com.cn.tenmall.service.admin.Impl;
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: AdminServiceImpl
@@ -9,7 +8,7 @@ package com.cn.tenmall.service.admin.Impl;
  * <author>          <time>          <version>          <desc>
  * 作者姓名           修改时间           版本号              描述
  */
-
+package com.cn.tenmall.service.admin.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.entity.WxTabAdmin;
