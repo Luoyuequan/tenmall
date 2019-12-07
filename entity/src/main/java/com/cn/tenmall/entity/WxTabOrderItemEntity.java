@@ -18,10 +18,10 @@ public class WxTabOrderItemEntity {
     private String skuId;
     private String orderId;
     private String name;
-    private Integer price;
+    private Double price;
     private Integer num;
-    private Integer money;
-    private Integer payMoney;
+    private Double money;
+    private Double payMoney;
     private String image;
     private Integer weight;
     private Integer postFee;

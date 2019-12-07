@@ -18,5 +18,5 @@ public class WxTabCategoryReportEntity {
     private Integer categoryId3;
     private Date countDate;
     private Integer num;
-    private Integer money;
+    private Double money;
 }
