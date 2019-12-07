@@ -11,6 +11,8 @@
 package com.cn.tenmall.service.role_menu.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cn.tenmall.dao.MenuDao;
+import com.cn.tenmall.dao.RoleDao;
 import com.cn.tenmall.dao.RoleMenuDao;
 import com.cn.tenmall.entity.WxRoleAndWxMenu;
 import com.cn.tenmall.enumClass.MessageEnum;
@@ -32,6 +34,10 @@ import org.springframework.stereotype.Service;
 public class RoleMenuServiceImpl implements RoleMenuService {
     @Autowired
     private RoleMenuDao roleMenuDao;
+    @Autowired
+    private RoleDao roleDao;
+    @Autowired
+    private MenuDao menuDao;
 
     @Override
     public TenmallResult save(WxRoleAndWxMenu roleAndWxMenu) {
@@ -59,6 +65,9 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     }
 
     private QueryWrapper<WxRoleAndWxMenu> getQWrapper(WxRoleAndWxMenu roleAndWxMenu){
+        if(roleDao.selectById(roleAndWxMenu.getRoleId())==null||menuDao.selectById(roleAndWxMenu.getMenuId())==null){
+            throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
+        }
         QueryWrapper<WxRoleAndWxMenu> queryWrapper=new QueryWrapper<WxRoleAndWxMenu>();
         queryWrapper.eq("role_id",roleAndWxMenu.getRoleId());
         queryWrapper.eq("menu_id",roleAndWxMenu.getMenuId());

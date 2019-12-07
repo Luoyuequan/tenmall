@@ -36,8 +36,8 @@ public class LoginFilter implements Filter {
         HttpServletRequest req= (HttpServletRequest) request;
         HttpServletResponse resp= (HttpServletResponse) response;
         response.setContentType("text/html");
-        String substring = req.getServletPath().substring(0, req.getServletPath().indexOf("."));
-        System.out.println(substring);
+//        String substring = req.getServletPath().substring(0, req.getServletPath().indexOf("."));
+//        System.out.println(substring);
 //        if(req.getSession().getAttribute("ADMIN")==null){
 //               resp.sendRedirect("/");
 //        }

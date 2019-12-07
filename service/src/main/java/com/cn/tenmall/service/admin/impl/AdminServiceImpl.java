@@ -42,11 +42,11 @@ public class AdminServiceImpl implements AdminService {
             if ((admin.getPassword()).equals(password.trim())) {
                 admin.setStatus(1);
                 if (adminDao.updateById(admin) > 0) {
-                    return TenmallResult.build(0,"登录成功");
+                    return TenmallResult.ok();
                 }
                 throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
             }
-            return TenmallResult.build(0,"密码错误");
+            return TenmallResult.build(1,"密码错误");
         }
         return TenmallResult.build(0,"用户名错误");
     }
