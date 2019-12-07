@@ -59,6 +59,17 @@ public interface WxTabOrderDao extends PublicDao<WxTabOrderEntity> {
         return findByColumnIn(TABLE_NAME, "id", collection);
     }
 
+    // TODO: 2019/12/7 将该订单的所有商品进行数量还原
+
+    /**
+     * 订单未支付超时关闭任务
+     *
+     * @param orderTimeout 超时时间
+     * @return 订单主表信息集
+     */
+    List<WxTabOrderEntity> findByPayStatusEqualsAndCreateTimeBeforeHalfhour(Integer orderTimeout);
+
+
     /**
      * 添加订单主表信息
      *
@@ -75,6 +86,16 @@ public interface WxTabOrderDao extends PublicDao<WxTabOrderEntity> {
      * @return 修改结果 影响行数
      */
     int updateById(WxTabOrderEntity wxTabOrderEntity);
+
+    /**
+     * 修改订单主表 订单状态
+     *
+     * @param wxTabOrderEntity 订单主表实体
+     * @return 修改结果 影响行数
+     */
+    default int updateOrderStatusById(WxTabOrderEntity wxTabOrderEntity) {
+        return updateById(wxTabOrderEntity);
+    }
 
     /**
      * 通过id 将已逻辑删除的记录进行逻辑恢复

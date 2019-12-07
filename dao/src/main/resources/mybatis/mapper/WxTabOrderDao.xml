@@ -106,4 +106,10 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="findByPayStatusEqualsAndCreateTimeBeforeHalfhour">
+        select *
+        from wx_tab_order
+        where pay_status = 0
+          and (time_to_sec(now()) - time_to_sec(create_time)) >= #{orderTimeout} * 60 = 1;
+    </select>
 </mapper>
