@@ -10,7 +10,7 @@ import java.util.List;
  * @time 2019/12/5 16:39
  */
 @Repository
-public interface WxTabOrderDao extends PublicDao<WxTabOrderEntity> {
+public interface OrderDao extends PublicDao<WxTabOrderEntity> {
     String TABLE_NAME = "wx_tab_order";
 
     /**

@@ -41,6 +41,27 @@ public class TenmallResult {
         return build(messageEnum.getCode(), messageEnum.getMessage());
     }
 
+    /**
+     * 业务成功 反馈提示语和数据
+     *
+     * @param messageEnum 消息枚举类
+     * @param data        数据
+     * @return view object
+     */
+    public static TenmallResult success(MessageEnum messageEnum, Object data) {
+        return new TenmallResult(messageEnum.getCode(), messageEnum.getMessage(), data);
+    }
+
+    /**
+     * 业务成功 反馈提示语且无数据
+     *
+     * @param messageEnum 消息枚举类
+     * @return view object
+     */
+    public static TenmallResult success(MessageEnum messageEnum) {
+        return success(messageEnum, null);
+    }
+
     public static TenmallResult ok(Object data) {
         return new TenmallResult(data);
     }

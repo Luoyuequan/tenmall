@@ -2,6 +2,10 @@ package com.cn.tenmall.enumClass;
 
 public enum MessageEnum {
     /**
+     * 操作成功 提示语
+     */
+    ACTION_SUCCESS(0, "操作成功"),
+    /**
      * 新增失败
      */
     ADD_ERROR(1, "新增失败"),
@@ -25,6 +29,7 @@ public enum MessageEnum {
      * 接收的参数无效
      */
     VARIABLE_INVALID_ERROR(1, "参数无效,请检查后,重新尝试"),
+
     /**
      * 接收的参数数量不符合要求
      */

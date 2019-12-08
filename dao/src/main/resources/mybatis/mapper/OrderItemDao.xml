@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cn.tenmall.dao.WxTabOrderItemDao">
+<mapper namespace="com.cn.tenmall.dao.OrderItemDao">
     <insert id="insert">
         insert into wx_tab_order_item (id, category_id1, category_id2,
                                        category_id3, spu_id, sku_id,

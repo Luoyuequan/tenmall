@@ -1,13 +1,15 @@
 package com.cn.tenmall.dao;
 
 import com.cn.tenmall.entity.WxTabReturnOrderEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author luo
  */
-public interface WxTabReturnOrderDao extends PublicDao<WxTabReturnOrderEntity> {
+@Repository
+public interface ReturnOrderDao extends PublicDao<WxTabReturnOrderEntity> {
     String TABLE_NAME = "wx_tab_return_order";
 
     /**

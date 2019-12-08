@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cn.tenmall.dao.WxTabReturnOrderDao">
+<mapper namespace="com.cn.tenmall.dao.ReturnOrderDao">
     <insert id="insert" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         insert into wx_tab_return_order
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -1,7 +1,7 @@
 package com.cn.tenmall.service.impl;
 
-import com.cn.tenmall.dao.WxTabOrderDao;
-import com.cn.tenmall.dao.WxTabOrderItemDao;
+import com.cn.tenmall.dao.OrderDao;
+import com.cn.tenmall.dao.OrderItemDao;
 import com.cn.tenmall.entity.WxTabOrderEntity;
 import com.cn.tenmall.entity.WxTabOrderItemEntity;
 import com.cn.tenmall.enumClass.MessageEnum;
@@ -21,14 +21,14 @@ import java.util.Map;
 @Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
-    private final WxTabOrderDao wxTabOrderDao;
-    private final WxTabOrderItemDao wxTabOrderItemDao;
+    private final OrderDao orderDao;
+    private final OrderItemDao orderItemDao;
     private WxTabOrderEntity wxTabOrderEntity = new WxTabOrderEntity();
     private WxTabOrderItemEntity wxTabOrderItemEntity = new WxTabOrderItemEntity();
 
-    public OrderServiceImpl(WxTabOrderDao wxTabOrderDao, WxTabOrderItemDao wxTabOrderItemDao) {
-        this.wxTabOrderDao = wxTabOrderDao;
-        this.wxTabOrderItemDao = wxTabOrderItemDao;
+    public OrderServiceImpl(OrderDao orderDao, OrderItemDao orderItemDao) {
+        this.orderDao = orderDao;
+        this.orderItemDao = orderItemDao;
     }
 
     /**
@@ -41,10 +41,10 @@ public class OrderServiceImpl implements OrderService {
     public TenmallResult listInfo(Map data) {
         Integer limit = (Integer) data.get("size");
         Integer offset = ((Integer) data.get("page") - 1) * limit;
-        List<WxTabOrderEntity> orderEntityList = wxTabOrderDao.findAllOfPageModel(offset, limit);
+        List<WxTabOrderEntity> orderEntityList = orderDao.findAllOfPageModel(offset, limit);
         for (WxTabOrderEntity orderEntity : orderEntityList) {
             wxTabOrderItemEntity.setOrderId(orderEntity.getId());
-            orderEntity.setWxTabOrderItemEntityList(wxTabOrderItemDao.findByOrderId(wxTabOrderItemEntity));
+            orderEntity.setWxTabOrderItemEntityList(orderItemDao.findByOrderId(wxTabOrderItemEntity));
         }
         return TenmallResult.ok(orderEntityList);
     }
@@ -57,10 +57,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public TenmallResult batchList(String[] idArray) {
-        List<WxTabOrderEntity> orderEntityList = wxTabOrderDao.findByIdIn(idArray);
+        List<WxTabOrderEntity> orderEntityList = orderDao.findByIdIn(idArray);
         for (WxTabOrderEntity orderEntity : orderEntityList) {
             wxTabOrderItemEntity.setOrderId(orderEntity.getId());
-            orderEntity.setWxTabOrderItemEntityList(wxTabOrderItemDao.findByOrderId(wxTabOrderItemEntity));
+            orderEntity.setWxTabOrderItemEntityList(orderItemDao.findByOrderId(wxTabOrderItemEntity));
         }
         return TenmallResult.ok(orderEntityList);
     }
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
         wxTabOrderEntity.setId((Integer) data.get("id"));
         wxTabOrderEntity.setShippingCode((String) data.get("shippingCode"));
         wxTabOrderEntity.setShippingName((String) data.get("shippingName"));
-        int updateResult = wxTabOrderDao.updateById(wxTabOrderEntity);
+        int updateResult = orderDao.updateById(wxTabOrderEntity);
         // TODO: 2019/12/8 订单的操作日志需要添加日志信息记录到表wx_tab_order_log中
         if (updateResult <= 0) {
             throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
