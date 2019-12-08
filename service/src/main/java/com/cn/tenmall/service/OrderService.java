@@ -1,6 +1,7 @@
 package com.cn.tenmall.service;
 
-import java.util.List;
+import com.cn.tenmall.vo.TenmallResult;
+
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public interface OrderService {
      * @param data
      * @return 订单信息列表
      */
-    List listInfo(Map data);
+    TenmallResult listInfo(Map data);
 
     /**
      * 批量发货查询
@@ -24,12 +25,12 @@ public interface OrderService {
      * @param idArray 订单id组
      * @return 订单列表
      */
-    List batchList(String[] idArray);
+    TenmallResult batchList(String[] idArray);
 
     /**
      * 批量发货提交
      *
      * @return 批量发货提交后信息
      */
-    Map batchSendSubmit(Map data);
+    TenmallResult batchSendSubmit(Map data);
 }

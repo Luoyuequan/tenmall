@@ -14,9 +14,9 @@ public class WxTabOrderItemEntity {
     private Integer categoryId1;
     private Integer categoryId2;
     private Integer categoryId3;
-    private String spuId;
-    private String skuId;
-    private String orderId;
+    private Integer spuId;
+    private Integer skuId;
+    private Integer orderId;
     private String name;
     private Double price;
     private Integer num;

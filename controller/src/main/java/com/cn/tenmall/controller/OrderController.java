@@ -1,6 +1,8 @@
 package com.cn.tenmall.controller;
 
+import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.OrderService;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -12,8 +14,6 @@ import java.util.Objects;
  * 订单管理
  *
  * @author luoyuequan
- * @version 1.00
- * @ClassName OrderController
  * @time 2019/11/21 12:14
  */
 @CrossOrigin
@@ -32,12 +32,11 @@ public class OrderController {
      * @return 订单列表
      */
     @RequestMapping(value = "findAll")
-    public List list(@RequestBody Map data) {
-        if (Objects.equals(data.get("page"), null) || Objects.equals(data.get("size"), null)) {
-            Map<String, Object> vo = new HashMap<>(16);
-            vo.put("code", 1);
-            vo.put("message", "page或size参数缺失,请检查后,重新尝试!");
-            return List.of(vo);
+    public TenmallResult list(@RequestBody Map data) {
+        String pageVariableName = "page";
+        String sizeVariableName = "size";
+        if (Objects.equals(data.get(pageVariableName), null) || Objects.equals(data.get(sizeVariableName), null)) {
+            return TenmallResult.error(MessageEnum.VARIABLE_MISS_ERROR);
         }
         return orderService.listInfo(data);
     }
@@ -48,8 +47,11 @@ public class OrderController {
      * @return 发货的订单列表
      */
     @RequestMapping(value = "batchFindAll")
-    public List batchList(@RequestParam(name = "ids") String ids) {
+    public TenmallResult batchList(@RequestParam(name = "ids") String ids) {
         String[] idArray = ids.split(",");
+        if (idArray.length == 0) {
+            return TenmallResult.error(MessageEnum.VARIABLE_INVALID_ERROR);
+        }
         return orderService.batchList(idArray);
     }
 
@@ -59,12 +61,10 @@ public class OrderController {
      * @return 批量发货提交后信息
      */
     @RequestMapping(value = "batchSendSubmit")
-    public Map batchSendSubmit(@RequestBody Map data) {
-        if (data.size() < 3) {
-            Map<String, Object> vo = new HashMap<>(16);
-            vo.put("code", 1);
-            vo.put("message", "orderId、shippingName、shippingCode参数缺失,请检查后,重新尝试!");
-            return vo;
+    public TenmallResult batchSendSubmit(@RequestBody Map data) {
+        int varLength = 3;
+        if (data.size() < varLength) {
+            return TenmallResult.error(MessageEnum.VARIABLE_MISS_ERROR);
         }
         return orderService.batchSendSubmit(data);
     }

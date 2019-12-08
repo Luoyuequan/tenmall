@@ -39,7 +39,7 @@ public interface WxTabOrderDao extends PublicDao<WxTabOrderEntity> {
      * @param limit  限制量
      * @return 订单主表信息集
      */
-    default List<WxTabOrderEntity> findAll(Object offset, Object limit) {
+    default List<WxTabOrderEntity> findAllOfPageModel(Object offset, Object limit) {
         return findAllOfPageModel(TABLE_NAME, offset, limit);
     }
 

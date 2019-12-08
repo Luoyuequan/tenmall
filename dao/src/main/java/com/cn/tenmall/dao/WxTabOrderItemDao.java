@@ -1,6 +1,7 @@
 package com.cn.tenmall.dao;
 
 import com.cn.tenmall.entity.WxTabOrderItemEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  * @author luoyuequan
  * @time 2019/12/6 16:58
  */
+@Repository
 public interface WxTabOrderItemDao extends PublicDao<WxTabOrderItemEntity> {
     String TABLE_NAME = "wx_tab_order_item";
 

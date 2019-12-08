@@ -1,5 +1,6 @@
 package com.cn.tenmall.vo;
 
+import com.cn.tenmall.enumClass.MessageEnum;
 import lombok.Data;
 
 @Data
@@ -36,6 +37,10 @@ public class TenmallResult {
         return build(status, msg, null);
     }
 
+    public static TenmallResult error(MessageEnum messageEnum) {
+        return build(messageEnum.getCode(), messageEnum.getMessage());
+    }
+
     public static TenmallResult ok(Object data) {
         return new TenmallResult(data);
     }
@@ -44,13 +49,13 @@ public class TenmallResult {
         return ok(null);
     }
 
-    public TenmallResult(Object data) {
+    private TenmallResult(Object data) {
         this.status = 0;
         this.msg = "ok";
         this.data = data;
     }
 
-    public TenmallResult(Integer status, String msg, Object data) {
+    private TenmallResult(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
