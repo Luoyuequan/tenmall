@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author Administrator
@@ -41,36 +41,36 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 
     @Override
     public TenmallResult save(WxRoleAndWxMenu roleAndWxMenu) {
-        QueryWrapper<WxRoleAndWxMenu> queryWrapper=getQWrapper(roleAndWxMenu);
-        if(roleMenuDao.selectList(queryWrapper).size()>0){
-            return TenmallResult.build(1,"已存在");
+        QueryWrapper<WxRoleAndWxMenu> queryWrapper = getQWrapper(roleAndWxMenu);
+        if (roleMenuDao.selectList(queryWrapper).size() > 0) {
+            return TenmallResult.build(1, "已存在");
         }
-            if(roleMenuDao.insert(roleAndWxMenu)>0){
-                return TenmallResult.ok();
-            }
-            throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
+        if (roleMenuDao.insert(roleAndWxMenu) > 0) {
+            return TenmallResult.ok();
+        }
+        throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
 
     }
 
     @Override
     public TenmallResult remove(WxRoleAndWxMenu roleAndWxMenu) {
-        QueryWrapper<WxRoleAndWxMenu> queryWrapper=getQWrapper(roleAndWxMenu);
-        if(roleMenuDao.selectList(queryWrapper).size()==0){
-            return TenmallResult.build(1,"不存在");
+        QueryWrapper<WxRoleAndWxMenu> queryWrapper = getQWrapper(roleAndWxMenu);
+        if (roleMenuDao.selectList(queryWrapper).size() == 0) {
+            return TenmallResult.build(1, "不存在");
         }
-        if(roleMenuDao.delete(queryWrapper)>0){
+        if (roleMenuDao.delete(queryWrapper) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }
 
-    private QueryWrapper<WxRoleAndWxMenu> getQWrapper(WxRoleAndWxMenu roleAndWxMenu){
-        if(roleDao.selectById(roleAndWxMenu.getRoleId())==null||menuDao.selectById(roleAndWxMenu.getMenuId())==null){
+    private QueryWrapper<WxRoleAndWxMenu> getQWrapper(WxRoleAndWxMenu roleAndWxMenu) {
+        if (roleDao.selectById(roleAndWxMenu.getRoleId()) == null || menuDao.selectById(roleAndWxMenu.getMenuId()) == null) {
             throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
         }
-        QueryWrapper<WxRoleAndWxMenu> queryWrapper=new QueryWrapper<WxRoleAndWxMenu>();
-        queryWrapper.eq("role_id",roleAndWxMenu.getRoleId());
-        queryWrapper.eq("menu_id",roleAndWxMenu.getMenuId());
+        QueryWrapper<WxRoleAndWxMenu> queryWrapper = new QueryWrapper<WxRoleAndWxMenu>();
+        queryWrapper.eq("role_id", roleAndWxMenu.getRoleId());
+        queryWrapper.eq("menu_id", roleAndWxMenu.getMenuId());
         return queryWrapper;
     }
 }

@@ -10,11 +10,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WxTabMenu {
-  private Long id;
-  @NotNull
-  private String name;
-  private String icon;
-  private String url;
-  private String parentId;
+    private Long id;
+    @NotNull
+    private String name;
+    private String icon;
+    private String url;
+    private String parentId;
 
 }

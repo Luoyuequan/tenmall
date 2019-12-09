@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈角色控制〉
  *
  * @author Administrator
@@ -36,42 +36,38 @@ public class RoleController {
     private RoleService roleService;
 
     /**
-     *
      * @param role
      * @return
      */
     @PostMapping("add")
-    public TenmallResult add(@Valid WxTabRole role){
+    public TenmallResult add(@Valid WxTabRole role) {
         return roleService.save(role);
     }
 
     /**
-     *
      * @param role
      * @return
      */
     @PostMapping("update")
-    public TenmallResult update(@Valid WxTabRole role){
+    public TenmallResult update(@Valid WxTabRole role) {
 
         return roleService.modify(role);
     }
 
     /**
-     *
      * @param id
      * @return
      */
     @PostMapping("delete")
-    public TenmallResult delete(@RequestParam Long id){
+    public TenmallResult delete(@RequestParam Long id) {
         return roleService.remove(id);
     }
 
     /**
-     *
      * @return
      */
     @PostMapping("findAll")
-    public TenmallResult findAll(){
+    public TenmallResult findAll() {
         return roleService.findAll();
     }
 

@@ -23,12 +23,12 @@
     <update id="update">
         update wx_tab_category
         set name=#{name},
-            goods_num=#{goodsNum},
-            is_show=#{isShow},
-            is_menu=#{isMenu},
-            seq=#{seq},
-            parent_id=#{parentId},
-            template_id=#{templateId}
+        goods_num=#{goodsNum},
+        is_show=#{isShow},
+        is_menu=#{isMenu},
+        seq=#{seq},
+        parent_id=#{parentId},
+        template_id=#{templateId}
         where id = #{id}
     </update>
 

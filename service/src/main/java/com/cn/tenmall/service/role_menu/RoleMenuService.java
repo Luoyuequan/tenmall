@@ -5,5 +5,6 @@ import com.cn.tenmall.vo.TenmallResult;
 
 public interface RoleMenuService {
     TenmallResult save(WxRoleAndWxMenu roleAndWxMenu);
+
     TenmallResult remove(WxRoleAndWxMenu roleAndWxMenu);
 }

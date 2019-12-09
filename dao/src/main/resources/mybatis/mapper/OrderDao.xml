@@ -3,24 +3,24 @@
 <mapper namespace="com.cn.tenmall.dao.OrderDao">
     <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         insert into wx_tab_order (total_num, total_money,
-                                  pre_money, post_fee, pay_money,
-                                  pay_type, create_time, update_time,
-                                  pay_time, consign_time, end_time,
-                                  close_time, shipping_name, shipping_code,
-                                  username, buyer_message, buyer_rate,
-                                  receiver_contact, receiver_mobile, receiver_address,
-                                  source_type, tansaction_id, order_status,
-                                  pay_status, consign_status)
+        pre_money, post_fee, pay_money,
+        pay_type, create_time, update_time,
+        pay_time, consign_time, end_time,
+        close_time, shipping_name, shipping_code,
+        username, buyer_message, buyer_rate,
+        receiver_contact, receiver_mobile, receiver_address,
+        source_type, tansaction_id, order_status,
+        pay_status, consign_status)
         values (#{totalNum,jdbcType=INTEGER}, #{totalMoney,jdbcType=INTEGER},
-                #{preMoney,jdbcType=INTEGER}, #{postFee,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
-                #{payType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-                #{payTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
-                #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR},
-                #{username,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerRate,jdbcType=TINYINT},
-                #{receiverContact,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR},
-                #{receiverAddress,jdbcType=VARCHAR},
-                #{sourceType,jdbcType=TINYINT}, #{tansactionId,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT},
-                #{payStatus,jdbcType=TINYINT}, #{consignStatus,jdbcType=TINYINT})
+        #{preMoney,jdbcType=INTEGER}, #{postFee,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
+        #{payType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{payTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+        #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR},
+        #{username,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, #{buyerRate,jdbcType=TINYINT},
+        #{receiverContact,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR},
+        #{receiverAddress,jdbcType=VARCHAR},
+        #{sourceType,jdbcType=TINYINT}, #{tansactionId,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT},
+        #{payStatus,jdbcType=TINYINT}, #{consignStatus,jdbcType=TINYINT})
     </insert>
     <update id="updateById">
         update wx_tab_order
@@ -110,6 +110,6 @@
         select *
         from wx_tab_order
         where pay_status = 0
-          and (time_to_sec(now()) - time_to_sec(create_time)) >= #{orderTimeout} * 60 = 1;
+        and (time_to_sec(now()) - time_to_sec(create_time)) >= #{orderTimeout} * 60 = 1;
     </select>
 </mapper>

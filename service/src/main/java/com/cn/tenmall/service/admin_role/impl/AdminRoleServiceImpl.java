@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author Administrator
@@ -38,14 +38,15 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     private AdminDao adminDao;
     @Autowired
     private RoleDao roleDao;
+
     @Override
     public TenmallResult save(WxAdminAndWxRole adminAndRole) {
-        WxAdminAndWxRole w=new WxAdminAndWxRole();
-        QueryWrapper<WxAdminAndWxRole> queryWrapper=getQWrapper(adminAndRole);
-        if(adminRoleDao.selectList(queryWrapper).size()>0){
-            return TenmallResult.build(1,"已存在");
+        WxAdminAndWxRole w = new WxAdminAndWxRole();
+        QueryWrapper<WxAdminAndWxRole> queryWrapper = getQWrapper(adminAndRole);
+        if (adminRoleDao.selectList(queryWrapper).size() > 0) {
+            return TenmallResult.build(1, "已存在");
         }
-        if(adminRoleDao.insert(adminAndRole)>0){
+        if (adminRoleDao.insert(adminAndRole) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
@@ -54,22 +55,23 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
     @Override
     public TenmallResult remove(WxAdminAndWxRole adminAndRole) {
-        QueryWrapper<WxAdminAndWxRole> queryWrapper=getQWrapper(adminAndRole);
-        if(adminRoleDao.selectList(queryWrapper).size()==0){
-            return TenmallResult.build(1,"不存在");
+        QueryWrapper<WxAdminAndWxRole> queryWrapper = getQWrapper(adminAndRole);
+        if (adminRoleDao.selectList(queryWrapper).size() == 0) {
+            return TenmallResult.build(1, "不存在");
         }
-        if(adminRoleDao.delete(queryWrapper)>0){
+        if (adminRoleDao.delete(queryWrapper) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }
-    private QueryWrapper<WxAdminAndWxRole> getQWrapper(WxAdminAndWxRole adminAndRole){
-        if(roleDao.selectById(adminAndRole.getRoleId())==null||adminDao.selectById(adminAndRole.getAdminId())==null){
+
+    private QueryWrapper<WxAdminAndWxRole> getQWrapper(WxAdminAndWxRole adminAndRole) {
+        if (roleDao.selectById(adminAndRole.getRoleId()) == null || adminDao.selectById(adminAndRole.getAdminId()) == null) {
             throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
         }
-        QueryWrapper<WxAdminAndWxRole> queryWrapper=new QueryWrapper<WxAdminAndWxRole>();
-        queryWrapper.eq("role_id",adminAndRole.getRoleId());
-        queryWrapper.eq("admin_id",adminAndRole.getAdminId());
+        QueryWrapper<WxAdminAndWxRole> queryWrapper = new QueryWrapper<WxAdminAndWxRole>();
+        queryWrapper.eq("role_id", adminAndRole.getRoleId());
+        queryWrapper.eq("admin_id", adminAndRole.getAdminId());
         return queryWrapper;
     }
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 public interface RoleService {
     /**
      * 新增角色业务
+     *
      * @param role
      * @return
      */
@@ -15,6 +16,7 @@ public interface RoleService {
 
     /**
      * 修改角色业务
+     *
      * @param role
      * @return
      */
@@ -22,6 +24,7 @@ public interface RoleService {
 
     /**
      * 删除角色业务
+     *
      * @param id
      * @return
      */
@@ -29,6 +32,7 @@ public interface RoleService {
 
     /**
      * 查询角色列表
+     *
      * @return
      */
     TenmallResult findAll();

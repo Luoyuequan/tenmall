@@ -11,13 +11,17 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WxTabAdmin {
-  private long id;
-  @NotNull
-  private String loginName;
-  @JsonView(adminDeta.class)
-  @NotNull
-  private String password;
-  private long status;
-  public interface adminSim{}
-  public interface adminDeta extends adminSim{}
+    private long id;
+    @NotNull
+    private String loginName;
+    @JsonView(adminDeta.class)
+    @NotNull
+    private String password;
+    private long status;
+
+    public interface adminSim {
+    }
+
+    public interface adminDeta extends adminSim {
+    }
 }

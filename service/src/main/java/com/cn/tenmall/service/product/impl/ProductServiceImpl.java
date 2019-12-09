@@ -10,6 +10,8 @@
  */
 package com.cn.tenmall.service.product.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cn.tenmall.dao.SkuDao;
@@ -23,6 +25,11 @@ import com.cn.tenmall.vo.PageObject;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.*;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -38,6 +45,9 @@ public class ProductServiceImpl implements ProductService {
     private SkuDao skuDao;
     @Autowired
     private SpuDao spuDao;
+
+    private WxTabSku wxTabSku = new WxTabSku();
+    private WxTabSpu wxTabSpu = new WxTabSpu();
 
     @Override
     public TenmallResult submitReq(Long id) {
@@ -119,5 +129,43 @@ public class ProductServiceImpl implements ProductService {
             pullReq(id[i]);
         }
         return TenmallResult.ok();
+    }
+
+    /**
+     * 新增sku与spu
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public TenmallResult add(Map map) {
+        List<Map> list = (List) map.get("skuList");
+        Map map1 = JSONObject.parseObject(JSONObject.toJSONString(map.get("spu")), Map.class);
+        boolean b = false;
+        for (int i = 0; i < list.size(); i++) {
+
+            Map map2 = JSONObject.parseObject(JSON.toJSONString(list.get(i)), Map.class);
+            if (map2.get("spec")!=null){
+                map2.put("spec","'"+map2.get("spec")+"'");
+            }
+            System.out.println(map2.get("spec"));
+            try {
+                int aa = skuDao.add(map2);
+                if (aa > 0) {
+                    b = true;
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+        if (b == true) {
+            if (spuDao.add(map1) > 0) {
+                return TenmallResult.success(MessageEnum.ADD_SUCCESS);
+            } else {
+                return TenmallResult.error(MessageEnum.ADD_ERROR);
+            }
+        }
+        return TenmallResult.error(MessageEnum.ADD_ERROR);
     }
 }

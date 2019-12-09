@@ -10,11 +10,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WxTabAlbum {
-  private long id;
-  @NotNull
-  private String title;
-  @NotNull
-  private String image;
-  @NotNull
-  private String imageItems;
+    private long id;
+    @NotNull
+    private String title;
+    @NotNull
+    private String image;
+    @NotNull
+    private String imageItems;
 }

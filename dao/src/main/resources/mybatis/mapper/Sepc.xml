@@ -20,9 +20,9 @@
     <update id="updateById">
         update wx_tab_spec
         set name=#{name},
-            options=#{options},
-            seq=#{seq},
-            template_id=#{templateId}
+        options=#{options},
+        seq=#{seq},
+        template_id=#{templateId}
         where id = #{id}
     </update>
     <!-- 删除-->

@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈〉
  *
  * @author Administrator
@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 public class AlbumServiceImpl implements AlbumService {
     @Autowired
     private AlbumDao albumDao;
+
     @Override
     public TenmallResult findAll() {
         return TenmallResult.ok(albumDao.selectList(null));
@@ -43,24 +44,24 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public TenmallResult save(WxTabAlbum album) {
-        if (albumDao.insert(album)>0){
-            return  TenmallResult.ok();
+        if (albumDao.insert(album) > 0) {
+            return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
 
     @Override
     public TenmallResult modify(WxTabAlbum album) {
-        if (albumDao.updateById(album)>0){
-            return  TenmallResult.ok();
+        if (albumDao.updateById(album) > 0) {
+            return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
     }
 
     @Override
     public TenmallResult delete(Long id) {
-        if (albumDao.deleteById(id)>0){
-            return  TenmallResult.ok();
+        if (albumDao.deleteById(id) > 0) {
+            return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
     }

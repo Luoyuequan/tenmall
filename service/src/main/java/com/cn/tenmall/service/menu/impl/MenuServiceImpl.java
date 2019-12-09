@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈菜单业务〉
  *
  * @author Administrator
@@ -42,11 +42,12 @@ public class MenuServiceImpl implements MenuService {
     private MenuDao menuDao;
     @Autowired
     private RoleMenuDao roleMenuDao;
+
     @Override
     public TenmallResult findCondPage(String name, Integer current, Integer size) {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.like("name",name);
-        return TenmallResult.ok(new PageObject<>(menuDao.selectCount(null),menuDao.selectPage(new Page(current, size), queryWrapper).getRecords()));
+        queryWrapper.like("name", name);
+        return TenmallResult.ok(new PageObject<>(menuDao.selectCount(null), menuDao.selectPage(new Page(current, size), queryWrapper).getRecords()));
     }
 
     @Override
@@ -56,14 +57,15 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public TenmallResult save(WxTabMenu menu) {
-        if(menuDao.insert(menu)>0){
+        if (menuDao.insert(menu) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
+
     @Override
     public TenmallResult modify(WxTabMenu menu) {
-        if(menuDao.updateById(menu)>0){
+        if (menuDao.updateById(menu) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
@@ -71,7 +73,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public TenmallResult delete(Serializable id) {
-        if(menuDao.deleteById(id)>0){
+        if (menuDao.deleteById(id) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());
@@ -79,10 +81,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public TenmallResult findAuthMenu(Long roleId) {
-        QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("role_id",roleId);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("role_id", roleId);
         List<WxRoleAndWxMenu> list = roleMenuDao.selectList(queryWrapper);
-        List<WxTabMenu> menus=new ArrayList<>();
+        List<WxTabMenu> menus = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             menus.add(menuDao.selectById(list.get(i).getMenuId()));
         }
