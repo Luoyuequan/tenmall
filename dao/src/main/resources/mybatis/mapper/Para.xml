@@ -18,9 +18,9 @@
     <update id="update">
         update wx_tab_para
         set name=#{name},
-            options=#{options},
-            seq=#{seq},
-            template_id=#{templateId}
+        options=#{options},
+        seq=#{seq},
+        template_id=#{templateId}
         where id = #{id}
     </update>
 

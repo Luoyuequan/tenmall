@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈角色和菜单关联表〉
  *
  * @author Administrator
@@ -34,15 +34,16 @@ import javax.validation.Valid;
 @RequestMapping("roleMenu")
 public class RoleMenuController {
     @Autowired
-    private  RoleMenuService roleMenuService;
+    private RoleMenuService roleMenuService;
 
     @PostMapping("add")
-    public TenmallResult add(@Valid WxRoleAndWxMenu roleAndWxMenu){
+    public TenmallResult add(@Valid WxRoleAndWxMenu roleAndWxMenu) {
 
         return roleMenuService.save(roleAndWxMenu);
     }
+
     @PostMapping("delete")
-    public TenmallResult delete(@Valid WxRoleAndWxMenu roleAndWxMenu){
+    public TenmallResult delete(@Valid WxRoleAndWxMenu roleAndWxMenu) {
         return roleMenuService.remove(roleAndWxMenu);
     }
 }

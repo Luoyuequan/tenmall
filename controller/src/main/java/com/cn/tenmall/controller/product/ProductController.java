@@ -12,13 +12,13 @@ package com.cn.tenmall.controller.product;
 
 import com.cn.tenmall.service.product.ProductService;
 import com.cn.tenmall.vo.TenmallResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈审核〉
  *
  * @author Administrator
@@ -29,53 +29,69 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("product")
 public class ProductController {
     private ProductService productService;
+
     /**
      * 商品提交审核
      */
     @PostMapping("submitReq")
-    public TenmallResult submitReq(@RequestParam Long id){
+    public TenmallResult submitReq(@RequestParam Long id) {
         return productService.submitReq(id);
     }
+
     /**
      * 商品待审核商品列表
      */
     @PostMapping("findAuditALL")
-    public TenmallResult findAuditALL(@RequestParam(defaultValue = "9") Integer status, @RequestParam Integer page, @RequestParam Integer size){
-        return productService.findAuditALL(status,page,size);
+    public TenmallResult findAuditALL(@RequestParam(defaultValue = "9") Integer status, @RequestParam Integer page, @RequestParam Integer size) {
+        return productService.findAuditALL(status, page, size);
     }
+
     /**
      * 商品审核
      */
     @PostMapping("auditReq")
-    public TenmallResult auditReq(@RequestParam Long id){
+    public TenmallResult auditReq(@RequestParam Long id) {
         return productService.auditReq(id);
     }
+
     /**
      * 下架商品
      */
     @PostMapping("pullReq")
-    public TenmallResult pullReq(@RequestParam Long id){
+    public TenmallResult pullReq(@RequestParam Long id) {
         return productService.pullReq(id);
     }
+
     /**
      * 上架商品
      */
     @PostMapping("shelvesReq")
-    public TenmallResult shelvesReq(@RequestParam Long id){
+    public TenmallResult shelvesReq(@RequestParam Long id) {
         return productService.shelvesReq(id);
     }
+
     /**
      * 批量上架商品
      */
     @PostMapping("batchShelvesReq")
-    public TenmallResult batchShelvesReq(@RequestParam Long... id){
+    public TenmallResult batchShelvesReq(@RequestParam Long... id) {
         return productService.batchShelvesReq(id);
     }
+
     /**
      * 批量下架商品
      */
     @PostMapping("batchPullReq")
-    public TenmallResult batchPullReq(@RequestParam Long... id){
+    public TenmallResult batchPullReq(@RequestParam Long... id) {
         return productService.batchPullReq(id);
+    }
+
+
+    @Autowired
+    ProductService service;
+    @RequestMapping("add")
+    public TenmallResult add(@RequestBody Map map) {
+
+        return service.add(map);
     }
 }

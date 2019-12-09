@@ -6,9 +6,13 @@ import com.cn.tenmall.vo.TenmallResult;
 import java.io.Serializable;
 
 public interface AdminService {
-    TenmallResult login(String username,String password);
+    TenmallResult login(String username, String password);
+
     TenmallResult out(String username);
+
     TenmallResult save(WxTabAdmin admin);
+
     TenmallResult modify(WxTabAdmin admin);
+
     TenmallResult delete(Serializable id);
 }

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈管理角色〉
  *
  * @author Administrator
@@ -35,11 +35,12 @@ public class AdminRoleController {
     private AdminRoleService adminRoleService;
 
     @PostMapping("add")
-    public TenmallResult add(@Valid WxAdminAndWxRole adminAndRole){
+    public TenmallResult add(@Valid WxAdminAndWxRole adminAndRole) {
         return adminRoleService.save(adminAndRole);
     }
+
     @PostMapping("delete")
-    public TenmallResult delete(@Valid WxAdminAndWxRole adminAndRole){
+    public TenmallResult delete(@Valid WxAdminAndWxRole adminAndRole) {
         return adminRoleService.remove(adminAndRole);
     }
 }

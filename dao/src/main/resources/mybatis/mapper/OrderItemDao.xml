@@ -3,17 +3,17 @@
 <mapper namespace="com.cn.tenmall.dao.OrderItemDao">
     <insert id="insert">
         insert into wx_tab_order_item (id, category_id1, category_id2,
-                                       category_id3, spu_id, sku_id,
-                                       order_id, name, price,
-                                       num, money, pay_money,
-                                       image, weight, post_fee,
-                                       is_return)
+        category_id3, spu_id, sku_id,
+        order_id, name, price,
+        num, money, pay_money,
+        image, weight, post_fee,
+        is_return)
         values (#{id,jdbcType=INTEGER}, #{categoryId1,jdbcType=INTEGER}, #{categoryId2,jdbcType=INTEGER},
-                #{categoryId3,jdbcType=INTEGER}, #{spuId,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR},
-                #{orderId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
-                #{num,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
-                #{image,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{postFee,jdbcType=INTEGER},
-                #{isReturn,jdbcType=CHAR})
+        #{categoryId3,jdbcType=INTEGER}, #{spuId,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR},
+        #{orderId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+        #{num,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, #{payMoney,jdbcType=INTEGER},
+        #{image,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{postFee,jdbcType=INTEGER},
+        #{isReturn,jdbcType=CHAR})
     </insert>
     <update id="updateById">
         update wx_tab_order_item

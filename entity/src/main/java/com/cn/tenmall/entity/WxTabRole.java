@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class WxTabRole {
 
-  private long id;
-  @NotNull
-  private String roleName;
+    private long id;
+    @NotNull
+    private String roleName;
 
 }

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈角色业务〉
  *
  * @author Administrator
@@ -33,9 +33,10 @@ import java.io.Serializable;
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
+
     @Override
     public TenmallResult save(WxTabRole role) {
-        if(roleDao.insert(role)>0){
+        if (roleDao.insert(role) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
@@ -43,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public TenmallResult modify(WxTabRole role) {
-        if(roleDao.updateById(role)>0){
+        if (roleDao.updateById(role) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
@@ -51,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public TenmallResult remove(Serializable id) {
-        if(roleDao.deleteById(id)>0){
+        if (roleDao.deleteById(id) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.DELETE_ERROR.getMessage());

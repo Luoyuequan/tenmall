@@ -20,18 +20,22 @@ public class CategoryController {
     public TenmallResult add(@Valid CategoryEntity categoryEntity) {
         return categoryService.add(categoryEntity);
     }
+
     @RequestMapping("update")
     public TenmallResult update(@Valid CategoryEntity categoryEntity) {
         return categoryService.update(categoryEntity);
     }
+
     @RequestMapping("findAll")
     public TenmallResult findAll() {
         return categoryService.findAll();
     }
+
     @RequestMapping("findByParentId")
     public TenmallResult findByParentId(@RequestParam Integer parentId) {
         return categoryService.findByParentId(parentId);
     }
+
     @RequestMapping("delete")
     public TenmallResult delete(@RequestParam Integer id) {
         return categoryService.deleteById(id);

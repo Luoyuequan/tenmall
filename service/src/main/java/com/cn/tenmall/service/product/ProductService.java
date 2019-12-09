@@ -2,6 +2,8 @@ package com.cn.tenmall.service.product;
 
 import com.cn.tenmall.vo.TenmallResult;
 
+import java.util.Map;
+
 public interface ProductService {
 
     TenmallResult submitReq(Long id);
@@ -17,4 +19,12 @@ public interface ProductService {
     TenmallResult batchShelvesReq(Long[] id);
 
     TenmallResult batchPullReq(Long[] id);
+
+    /**
+     * 新增sku与spu
+     *
+     * @param map
+     * @return
+     */
+    TenmallResult add(Map map);
 }

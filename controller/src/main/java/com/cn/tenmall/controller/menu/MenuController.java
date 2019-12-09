@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈菜单Controller〉
  *
  * @author Administrator
@@ -36,65 +36,72 @@ import javax.validation.Valid;
 public class MenuController {
     @Autowired
     private MenuService menuService;
+
     /**
      * 获取条件菜单列表接口
-     * @param name 菜单名称
+     *
+     * @param name    菜单名称
      * @param current 页码
-     * @param size 每页记录数
+     * @param size    每页记录数
      * @return
      */
 
     @PostMapping("findCondPage")
-    public TenmallResult findCondPage(@RequestParam("name")String name, @RequestParam("page")Integer current, @RequestParam("size")Integer size){
-         return menuService.findCondPage(name, current, size);
+    public TenmallResult findCondPage(@RequestParam("name") String name, @RequestParam("page") Integer current, @RequestParam("size") Integer size) {
+        return menuService.findCondPage(name, current, size);
     }
 
 
     /**
      * 获取所有菜单列表接口
+     *
      * @return
      */
     @PostMapping("findAll")
-    public TenmallResult findAll(){
+    public TenmallResult findAll() {
         return menuService.findAll();
     }
 
     /**
      * 获取权限范围内菜单列表接口
+     *
      * @return
      */
     @PostMapping("findAuthMenu")
-    public TenmallResult findAuthMenu(@RequestParam Long roleId){
+    public TenmallResult findAuthMenu(@RequestParam Long roleId) {
         return menuService.findAuthMenu(roleId);
     }
 
     /**
      * 菜单新增接口
+     *
      * @param menu 菜单对象
      * @return
      */
     @PostMapping("add")
-    public TenmallResult add(@Valid WxTabMenu menu){
+    public TenmallResult add(@Valid WxTabMenu menu) {
         return menuService.save(menu);
     }
 
     /**
      * 菜单修改接口
+     *
      * @param menu 菜单对象
      * @return
      */
     @PostMapping("update")
-    public TenmallResult update(@Valid WxTabMenu menu){
+    public TenmallResult update(@Valid WxTabMenu menu) {
         return menuService.modify(menu);
     }
 
     /**
      * 菜单删除接口
+     *
      * @param id id
      * @return
      */
     @PostMapping("delete")
-    public TenmallResult delete(@RequestParam Long id){
+    public TenmallResult delete(@RequestParam Long id) {
         return menuService.delete(id);
     }
 

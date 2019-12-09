@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WxRoleAndWxMenu {
-  private long id;
-  @NotNull
-  @Min(1)
-  private long roleId;
-  @NotNull
-  @Min(1)
-  private long menuId;
+    private long id;
+    @NotNull
+    @Min(1)
+    private long roleId;
+    @NotNull
+    @Min(1)
+    private long menuId;
 }

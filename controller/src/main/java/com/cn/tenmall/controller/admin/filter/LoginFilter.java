@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈是否登录〉
  *
  * @author Administrator
@@ -33,8 +33,8 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 //        System.out.println("CustomFilter doFilter before.");
-        HttpServletRequest req= (HttpServletRequest) request;
-        HttpServletResponse resp= (HttpServletResponse) response;
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
         response.setContentType("text/html");
 //        String substring = req.getServletPath().substring(0, req.getServletPath().indexOf("."));
 //        System.out.println(substring);

@@ -10,6 +10,10 @@ public enum MessageEnum {
      */
     ADD_ERROR(1, "新增失败"),
     /**
+     * 新增成功
+     */
+    ADD_SUCCESS(0, "新增成功"),
+    /**
      * 删除失败
      */
     DELETE_ERROR(1, "删除失败"),

@@ -34,8 +34,10 @@ import javax.validation.Valid;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+
     /**
      * 账号登录
+     *
      * @param username
      * @param password
      * @return
@@ -47,6 +49,7 @@ public class AdminController {
 
     /**
      * 账号退出
+     *
      * @param username
      * @return
      */
@@ -54,33 +57,37 @@ public class AdminController {
     public TenmallResult adminOut(@RequestParam String username) {
         return adminService.out(username);
     }
+
     /**
      * 管理员新增接口
+     *
      * @param admin 管理员对象
      * @return
      */
     @PostMapping("add")
-    public TenmallResult add(@Valid WxTabAdmin admin){
+    public TenmallResult add(@Valid WxTabAdmin admin) {
         return adminService.save(admin);
     }
 
     /**
      * 管理员修改接口
+     *
      * @param admin 管理员对象
      * @return
      */
     @PostMapping("update")
-    public TenmallResult update(@Valid WxTabAdmin admin){
+    public TenmallResult update(@Valid WxTabAdmin admin) {
         return adminService.modify(admin);
     }
 
     /**
      * 管理员删除接口
+     *
      * @param id id
      * @return
      */
     @PostMapping("delete")
-    public TenmallResult delete(@RequestParam Long id){
+    public TenmallResult delete(@RequestParam Long id) {
         return adminService.delete(id);
     }
 

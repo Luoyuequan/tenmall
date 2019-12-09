@@ -9,6 +9,7 @@
  * 作者姓名           修改时间           版本号              描述
  */
 package com.cn.tenmall.service.admin.Impl;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.tenmall.dao.AdminDao;
 import com.cn.tenmall.entity.WxTabAdmin;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 
 /**
- * 〈一句话功能简述〉<br> 
+ * 〈一句话功能简述〉<br>
  * 〈管理员业务层〉
  *
  * @author Administrator
@@ -45,33 +46,35 @@ public class AdminServiceImpl implements AdminService {
                 }
                 throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
             }
-            return TenmallResult.build(1,"密码错误");
+            return TenmallResult.build(1, "密码错误");
         }
-        return TenmallResult.build(0,"用户名错误");
+        return TenmallResult.build(0, "用户名错误");
     }
 
     @Override
     public TenmallResult out(String username) {
         WxTabAdmin admin = findByUserName(username);
-        if(admin!=null){
+        if (admin != null) {
             admin.setStatus(2);
             if (adminDao.updateById(admin) > 0) {
                 return TenmallResult.ok();
             }
             throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
         }
-        return TenmallResult.build(0,"用户名错误");
+        return TenmallResult.build(0, "用户名错误");
     }
+
     @Override
     public TenmallResult save(WxTabAdmin admin) {
-        if(adminDao.insert(admin)>0){
+        if (adminDao.insert(admin) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
+
     @Override
     public TenmallResult modify(WxTabAdmin admin) {
-        if(adminDao.updateById(admin)>0){
+        if (adminDao.updateById(admin) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
@@ -79,19 +82,21 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public TenmallResult delete(Serializable id) {
-        if(adminDao.deleteById(id)>0){
+        if (adminDao.deleteById(id) > 0) {
             return TenmallResult.ok();
         }
         throw new ServiceException(MessageEnum.ADD_ERROR.getMessage());
     }
+
     /**
      * 根据username获取对象
+     *
      * @param username 管理员名
      * @return
      */
     private WxTabAdmin findByUserName(String username) {
-        QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("login_name",username);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("login_name", username);
         return (WxTabAdmin) adminDao.selectList(queryWrapper).get(0);
     }
 }

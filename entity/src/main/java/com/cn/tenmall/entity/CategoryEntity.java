@@ -16,7 +16,7 @@ public class CategoryEntity {
     @NotNull
     private String name;
     // 商品数量
-    private Integer goodsNum=0;
+    private Integer goodsNum = 0;
     // 是否显示
     @NotNull
     private String isShow;
@@ -27,7 +27,7 @@ public class CategoryEntity {
     private Integer seq;
     // 上级ID
     @NotNull
-    private Integer parentId=0;
+    private Integer parentId = 0;
     // 模板ID
     @NotNull
     private Integer templateId;
