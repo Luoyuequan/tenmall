@@ -52,11 +52,16 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 批量发货查询
      *
-     * @param idArray 订单id组
+     * @param ids 订单id组
      * @return 订单列表
      */
     @Override
-    public TenmallResult batchList(String[] idArray) {
+    public TenmallResult batchList(String[] ids) {
+//        字符串数组 转换为 整型数组
+        Integer[] idArray = new Integer[ids.length];
+        for (int i = 0; i < ids.length; i++) {
+            idArray[i] = Integer.parseInt(ids[i]);
+        }
         List<WxTabOrderEntity> orderEntityList = orderDao.findByIdIn(idArray);
         for (WxTabOrderEntity orderEntity : orderEntityList) {
             wxTabOrderItemEntity.setOrderId(orderEntity.getId());
@@ -84,4 +89,5 @@ public class OrderServiceImpl implements OrderService {
             return TenmallResult.ok("发货成功");
         }
     }
+
 }

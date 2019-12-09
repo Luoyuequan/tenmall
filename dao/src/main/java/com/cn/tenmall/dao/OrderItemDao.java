@@ -3,7 +3,9 @@ package com.cn.tenmall.dao;
 import com.cn.tenmall.entity.WxTabOrderItemEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author luoyuequan
@@ -23,6 +25,15 @@ public interface OrderItemDao extends PublicDao<WxTabOrderItemEntity> {
     default WxTabOrderItemEntity findById(WxTabOrderItemEntity wxTabOrderItemEntity) {
         return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderItemEntity.getId());
     }
+
+
+    /**
+     * 根据订单主表id in查询和CategoryId1分类，获取所有的订单详细表并统计PayMoney和数量
+     *
+     * @param orderIds 订单主表id 集合
+     * @return 统计结果
+     */
+    List<Map> countPayMoneyAndNumberByOrderIdInGroupByCategoryId1(Collection orderIds);
 
     /**
      * 根据订单主表id

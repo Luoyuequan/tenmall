@@ -4,7 +4,7 @@ spring:
   datasource:
     password: root
     username: root
-    url: jdbc:mysql://192.168.0.27:3306/tenmall?serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.0.77:3306/tenmall?serverTimezone=GMT%2B8
 #    driver-class-name: com.mysql.cj.jdbc.Driver
     # 指定 Druid 数据源
     type: com.alibaba.druid.pool.DruidDataSource

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.tenmall.dao.CategoryReportDao">
+    <insert id="insert">
+        insert into wx_tab_category_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId1 != null">
+                category_id1,
+            </if>
+            <if test="categoryId2 != null">
+                category_id2,
+            </if>
+            <if test="categoryId3 != null">
+                category_id3,
+            </if>
+            <if test="countDate != null">
+                count_date,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId1 != null">
+                #{categoryId1,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId2 != null">
+                #{categoryId2,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId3 != null">
+                #{categoryId3,jdbcType=INTEGER},
+            </if>
+            <if test="countDate != null">
+                #{countDate,jdbcType=DATE},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey">
+        update wx_tab_category_report
+        <set>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where category_id1 = #{categoryId1,jdbcType=INTEGER}
+        and category_id2 = #{categoryId2,jdbcType=INTEGER}
+        and category_id3 = #{categoryId3,jdbcType=INTEGER}
+        and count_date = #{countDate,jdbcType=DATE}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete
+        from wx_tab_category_report
+        where category_id1 = #{categoryId1,jdbcType=INTEGER}
+          and category_id2 = #{categoryId2,jdbcType=INTEGER}
+          and category_id3 = #{categoryId3,jdbcType=INTEGER}
+          and count_date = #{countDate,jdbcType=DATE}
+    </delete>
+    <select id="findByCountDate" resultType="com.cn.tenmall.entity.WxTabCategoryReportEntity">
+        select *
+        from wx_tab_category_report
+        where count_date &gt;= #{beginDate}
+          and count_date &lt;= #{endDate}
+    </select>
+</mapper>

@@ -1,10 +1,13 @@
 package com.cn.tenmall.service;
 
+import com.cn.tenmall.entity.WxTabCategoryReportEntity;
+
+import java.util.List;
+
 /**
  * @author luoyuequan
- * @version 1.00
- * @ClassName ReportService
  * @time 2019/11/22 16:56
  */
 public interface ReportService {
+    List<WxTabCategoryReportEntity> findByCountDate(String beginDate, String endDate);
 }

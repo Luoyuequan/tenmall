@@ -40,10 +40,17 @@ public interface OrderConfigDao extends PublicDao<WxTabOrderConfigEntity> {
     /**
      * 查询所有订单设置表信息 无分页
      *
-     * @param wxTabOrderConfigEntity 订单设置信息 实体
      * @return 查询结果 订单设置表
      */
-    default List<WxTabOrderConfigEntity> findAll(WxTabOrderConfigEntity wxTabOrderConfigEntity) {
+    default List<WxTabOrderConfigEntity> findAll() {
         return findAll(TABLE_NAME);
     }
+
+    /**
+     * 根据设置表id 修改 订单设置信息
+     *
+     * @param wxTabOrderConfigEntity 订单设置信息 实体
+     * @return 修改结果
+     */
+    int updateByid(WxTabOrderConfigEntity wxTabOrderConfigEntity);
 }

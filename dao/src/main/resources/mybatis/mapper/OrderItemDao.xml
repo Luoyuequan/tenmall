@@ -66,4 +66,19 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="countPayMoneyAndNumberByOrderIdInGroupByCategoryId1"
+            resultType="java.util.Map">
+        select category_id1 as categoryId1, category_id2 as categoryId2, category_id3 as categoryId3, count(pay_money)
+        as money, count(num) as num
+        from wx_tab_order_item
+        <where>
+            <if test="#{collection} != null">
+                <foreach item="item" index="index" collection="collection" open="order_id in (" separator=","
+                         close=")">
+                    #{item.id}
+                </foreach>
+            </if>
+        </where>
+        group by category_id1
+    </select>
 </mapper>
