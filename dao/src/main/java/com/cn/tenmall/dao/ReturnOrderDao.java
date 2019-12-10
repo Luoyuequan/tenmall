@@ -9,7 +9,7 @@ import java.util.List;
  * @author luo
  */
 @Repository
-public interface ReturnOrderDao extends PublicDao<WxTabReturnOrderEntity> {
+public interface ReturnOrderDao extends PublicDao {
     String TABLE_NAME = "wx_tab_return_order";
 
     /**

@@ -5,8 +5,6 @@ import com.cn.tenmall.service.OrderService;
 import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -47,8 +45,11 @@ public class OrderController {
      * @return 发货的订单列表
      */
     @RequestMapping(value = "batchFindAll")
-    public TenmallResult batchList(@RequestParam(name = "ids") String ids) {
-        String[] idArray = ids.split(",");
+    public TenmallResult batchList(@RequestBody Map data) {
+        if (data.isEmpty()) {
+            return TenmallResult.error(MessageEnum.VARIABLE_MISS_ERROR);
+        }
+        String[] idArray = ((String) data.get("ids")).split(",");
         if (idArray.length == 0) {
             return TenmallResult.error(MessageEnum.VARIABLE_INVALID_ERROR);
         }
@@ -63,7 +64,7 @@ public class OrderController {
     @RequestMapping(value = "batchSendSubmit")
     public TenmallResult batchSendSubmit(@RequestBody Map data) {
         int varLength = 3;
-        if (data.size() < varLength) {
+        if (data.isEmpty() || data.size() < varLength) {
             return TenmallResult.error(MessageEnum.VARIABLE_MISS_ERROR);
         }
         return orderService.batchSendSubmit(data);

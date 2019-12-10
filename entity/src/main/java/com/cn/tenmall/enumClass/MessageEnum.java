@@ -2,6 +2,10 @@ package com.cn.tenmall.enumClass;
 
 public enum MessageEnum {
     /**
+     * 查询成功 提示语
+     */
+    FIND_SUCCESS(0, "查询成功"),
+    /**
      * 操作成功 提示语
      */
     ACTION_SUCCESS(0, "操作成功"),

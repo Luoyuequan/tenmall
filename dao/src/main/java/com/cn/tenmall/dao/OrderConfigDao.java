@@ -16,7 +16,7 @@ import java.util.List;
  * @time 17:20
  */
 @Repository
-public interface OrderConfigDao extends PublicDao<WxTabOrderConfigEntity> {
+public interface OrderConfigDao extends PublicDao {
     String TABLE_NAME = "wx_tab_order_config";
 
     /**
@@ -34,7 +34,7 @@ public interface OrderConfigDao extends PublicDao<WxTabOrderConfigEntity> {
      * @return 查询结果 订单设置表
      */
     default WxTabOrderConfigEntity findById(WxTabOrderConfigEntity wxTabOrderConfigEntity) {
-        return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderConfigEntity.getId());
+        return (WxTabOrderConfigEntity) findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderConfigEntity.getId());
     }
 
     /**
@@ -52,5 +52,5 @@ public interface OrderConfigDao extends PublicDao<WxTabOrderConfigEntity> {
      * @param wxTabOrderConfigEntity 订单设置信息 实体
      * @return 修改结果
      */
-    int updateByid(WxTabOrderConfigEntity wxTabOrderConfigEntity);
+    int updateById(WxTabOrderConfigEntity wxTabOrderConfigEntity);
 }

@@ -84,7 +84,7 @@ public class RefundServiceImpl implements RefundService {
         wxTabReturnCauseEntity.setId(id);
         try {
             wxTabReturnCauseEntity = returnCauseDao.findById(wxTabReturnCauseEntity);
-            return TenmallResult.success(MessageEnum.ACTION_SUCCESS, wxTabReturnCauseEntity);
+            return TenmallResult.success(MessageEnum.FIND_SUCCESS, wxTabReturnCauseEntity);
         } catch (Exception e) {
             throw new ServiceException(MessageEnum.FIND_ERROR.getMessage());
         }

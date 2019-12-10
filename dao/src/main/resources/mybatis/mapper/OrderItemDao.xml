@@ -72,7 +72,7 @@
         as money, count(num) as num
         from wx_tab_order_item
         <where>
-            <if test="#{collection} != null">
+            <if test="collection != null">
                 <foreach item="item" index="index" collection="collection" open="order_id in (" separator=","
                          close=")">
                     #{item.id}

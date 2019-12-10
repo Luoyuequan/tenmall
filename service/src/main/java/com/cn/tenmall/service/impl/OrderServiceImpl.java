@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
             wxTabOrderItemEntity.setOrderId(orderEntity.getId());
             orderEntity.setWxTabOrderItemEntityList(orderItemDao.findByOrderId(wxTabOrderItemEntity));
         }
-        return TenmallResult.ok(orderEntityList);
+        return TenmallResult.success(MessageEnum.FIND_SUCCESS, orderEntityList);
     }
 
     /**
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
             wxTabOrderItemEntity.setOrderId(orderEntity.getId());
             orderEntity.setWxTabOrderItemEntityList(orderItemDao.findByOrderId(wxTabOrderItemEntity));
         }
-        return TenmallResult.ok(orderEntityList);
+        return TenmallResult.success(MessageEnum.FIND_SUCCESS, orderEntityList);
     }
 
     /**
@@ -81,13 +81,19 @@ public class OrderServiceImpl implements OrderService {
         wxTabOrderEntity.setId((Integer) data.get("id"));
         wxTabOrderEntity.setShippingCode((String) data.get("shippingCode"));
         wxTabOrderEntity.setShippingName((String) data.get("shippingName"));
-        int updateResult = orderDao.updateById(wxTabOrderEntity);
-        // TODO: 2019/12/8 订单的操作日志需要添加日志信息记录到表wx_tab_order_log中
-        if (updateResult <= 0) {
+        try {
+            int updateResult = orderDao.updateById(wxTabOrderEntity);
+            // TODO: 2019/12/8 订单的操作日志需要添加日志信息记录到表wx_tab_order_log中
+            if (updateResult <= 0) {
+                throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
+            } else {
+                log.info("订单的操作日志-订单:{}",wxTabOrderEntity);
+                return TenmallResult.ok("发货成功");
+            }
+        }catch (ServiceException e){
             throw new ServiceException(MessageEnum.UPDATE_ERROR.getMessage());
-        } else {
-            return TenmallResult.ok("发货成功");
         }
+
     }
 
 }

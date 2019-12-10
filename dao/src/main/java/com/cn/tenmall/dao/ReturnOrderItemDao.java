@@ -11,7 +11,7 @@ import java.util.List;
  * @see com.cn.tenmall.dao.PublicDao
  */
 @Repository
-public interface ReturnOrderItemDao extends PublicDao<WxTabReturnOrderItemEntity> {
+public interface ReturnOrderItemDao extends PublicDao {
     String TABLE_NAME = "wx_tab_return_order_item";
 
     /**

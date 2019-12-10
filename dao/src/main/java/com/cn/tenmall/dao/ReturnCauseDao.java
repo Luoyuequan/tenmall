@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * @author luoyuequan
  */
 @Repository
-public interface ReturnCauseDao extends PublicDao<WxTabReturnCauseEntity> {
+public interface ReturnCauseDao extends PublicDao {
     String TABLE_NAME = "wx_tab_return_cause";
 
     /**
@@ -43,6 +43,6 @@ public interface ReturnCauseDao extends PublicDao<WxTabReturnCauseEntity> {
      * @return 查询结果 原因表实体
      */
     default WxTabReturnCauseEntity findById(WxTabReturnCauseEntity wxTabReturnCauseEntity) {
-        return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabReturnCauseEntity.getId());
+        return (WxTabReturnCauseEntity) findByColumnForOnlyValue(TABLE_NAME, "id", wxTabReturnCauseEntity.getId());
     }
 }

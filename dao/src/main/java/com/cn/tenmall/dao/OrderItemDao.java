@@ -1,6 +1,7 @@
 package com.cn.tenmall.dao;
 
 import com.cn.tenmall.entity.WxTabOrderItemEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @time 2019/12/6 16:58
  */
 @Repository
-public interface OrderItemDao extends PublicDao<WxTabOrderItemEntity> {
+public interface OrderItemDao extends PublicDao {
     String TABLE_NAME = "wx_tab_order_item";
 
     /**
@@ -23,9 +24,8 @@ public interface OrderItemDao extends PublicDao<WxTabOrderItemEntity> {
      * @return 订单详细表信息
      */
     default WxTabOrderItemEntity findById(WxTabOrderItemEntity wxTabOrderItemEntity) {
-        return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderItemEntity.getId());
+        return (WxTabOrderItemEntity) findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderItemEntity.getId());
     }
-
 
     /**
      * 根据订单主表id in查询和CategoryId1分类，获取所有的订单详细表并统计PayMoney和数量
@@ -33,7 +33,7 @@ public interface OrderItemDao extends PublicDao<WxTabOrderItemEntity> {
      * @param orderIds 订单主表id 集合
      * @return 统计结果
      */
-    List<Map> countPayMoneyAndNumberByOrderIdInGroupByCategoryId1(Collection orderIds);
+    List<Map> countPayMoneyAndNumberByOrderIdInGroupByCategoryId1(@Param("collection") Collection orderIds);
 
     /**
      * 根据订单主表id

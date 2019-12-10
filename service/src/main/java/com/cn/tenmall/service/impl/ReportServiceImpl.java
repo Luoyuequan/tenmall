@@ -2,7 +2,10 @@ package com.cn.tenmall.service.impl;
 
 import com.cn.tenmall.dao.CategoryReportDao;
 import com.cn.tenmall.entity.WxTabCategoryReportEntity;
+import com.cn.tenmall.enumClass.MessageEnum;
 import com.cn.tenmall.service.ReportService;
+import com.cn.tenmall.service.exception.ServiceException;
+import com.cn.tenmall.vo.TenmallResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +23,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<WxTabCategoryReportEntity> findByCountDate(String beginDate, String endDate) {
-        return categoryReportDao.findByCountDate(beginDate, endDate);
+    public TenmallResult findByCountDate(String beginDate, String endDate) {
+        try {
+            List<WxTabCategoryReportEntity> categoryReportEntityList = categoryReportDao.findByCountDate(beginDate, endDate);
+            return TenmallResult.success(MessageEnum.FIND_SUCCESS, categoryReportEntityList);
+        } catch (ServiceException e) {
+            return TenmallResult.error(MessageEnum.FIND_ERROR);
+        }
     }
 }

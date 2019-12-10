@@ -10,7 +10,7 @@ import java.util.List;
  * @time 2019/12/5 16:39
  */
 @Repository
-public interface OrderDao extends PublicDao<WxTabOrderEntity> {
+public interface OrderDao extends PublicDao {
     String TABLE_NAME = "wx_tab_order";
 
     /**
@@ -20,7 +20,7 @@ public interface OrderDao extends PublicDao<WxTabOrderEntity> {
      * @return 订单主表信息
      */
     default WxTabOrderEntity findById(WxTabOrderEntity wxTabOrderEntity) {
-        return findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderEntity.getId());
+        return (WxTabOrderEntity) findByColumnForOnlyValue(TABLE_NAME, "id", wxTabOrderEntity.getId());
     }
 
     /**

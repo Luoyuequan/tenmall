@@ -8,7 +8,7 @@ import java.util.List;
  * @author luoyuequan
  * @time 2019/12/6 17:05
  */
-public interface PublicDao<T> {
+public interface PublicDao {
     /**
      * 适用于 全部查询 分页查询 唯一索引查询 非唯一索引查询 集合in查询
      *
@@ -21,7 +21,7 @@ public interface PublicDao<T> {
      * @param collection   集合值
      * @return 信息集
      */
-    List<T> findAllOfCommon(
+    List findAllOfCommon(
             @Param(value = "tableName") String tableName, @Param(value = "equalsColumn") String equalsColumn,
             @Param(value = "equalsValue") Object equalsValue, @Param(value = "offset") Object offset,
             @Param(value = "limit") Object limit, @Param(value = "inColumn") String inColumn,
@@ -36,11 +36,13 @@ public interface PublicDao<T> {
      * @param equalsValue  参数值
      * @return 实体信息
      */
-    default T findByColumnForOnlyValue(String tableName, String equalsColumn, Object equalsValue) {
-        return findAllOfCommon(
-                tableName, equalsColumn, equalsValue,
-                null, null, null, null)
-                .get(0);
+    default Object findByColumnForOnlyValue(String tableName, String equalsColumn, Object equalsValue) {
+        List list = findAllOfCommon(tableName, equalsColumn, equalsValue, null, null, null, null);
+        if (list.isEmpty()) {
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
 
     /**
@@ -51,7 +53,7 @@ public interface PublicDao<T> {
      * @param equalsValue  参数值
      * @return 实体信息集合
      */
-    default List<T> findByColumnOfPageModel(
+    default List findByColumnOfPageModel(
             String tableName, String equalsColumn, Object equalsValue, Object offset, Object limit
     ) {
         return findAllOfCommon(tableName, equalsColumn, equalsValue, offset, limit, null, null);
@@ -65,7 +67,7 @@ public interface PublicDao<T> {
      * @param equalsValue  参数值
      * @return 实体信息集合
      */
-    default List<T> findByColumn(String tableName, String equalsColumn, Object equalsValue) {
+    default List findByColumn(String tableName, String equalsColumn, Object equalsValue) {
         return findByColumnOfPageModel(tableName, equalsColumn, equalsValue, null, null);
     }
 
@@ -77,7 +79,7 @@ public interface PublicDao<T> {
      * @param limit     限制量
      * @return 实体信息集
      */
-    default List<T> findAllOfPageModel(String tableName, Object offset, Object limit) {
+    default List findAllOfPageModel(String tableName, Object offset, Object limit) {
         return findAllOfCommon(tableName, null, null, offset, limit, null, null);
     }
 
@@ -87,7 +89,7 @@ public interface PublicDao<T> {
      * @param tableName 表名
      * @return 实体信息集
      */
-    default List<T> findAll(String tableName) {
+    default List findAll(String tableName) {
         return findAllOfPageModel(tableName, null, null);
     }
 
@@ -99,7 +101,7 @@ public interface PublicDao<T> {
      * @param collection 数据集合
      * @return 实体信息集合
      */
-    default List<T> findByColumnIn(String tableName, String inColumn, Object collection) {
+    default List findByColumnIn(String tableName, String inColumn, Object collection) {
         return findAllOfCommon(tableName, null, null, null, null,
                 inColumn, collection);
     }

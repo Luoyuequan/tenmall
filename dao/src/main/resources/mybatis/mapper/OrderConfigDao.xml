@@ -5,7 +5,7 @@
         insert into wx_tab_order_config (order_timeout, seckill_timeout, take_timeout, service_timeout, comment_timeout)
         values (#{orderTimeout}, #{seckillTimeout}, #{takeTime}, #{serviceTimeout}, #{commentTimeout})
     </insert>
-    <update id="updateByid">
+    <update id="updateById">
         update wx_tab_order_config
         <set>
             <if test="orderTimeout != null">

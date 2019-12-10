@@ -11,7 +11,7 @@ import java.util.List;
  * @time 2019/12/9 17:19
  */
 @Repository
-public interface CategoryReportDao extends PublicDao<WxTabCategoryReportEntity> {
+public interface CategoryReportDao extends PublicDao {
     /**
      * 添加 统计结果
      *
