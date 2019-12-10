@@ -1,16 +1,17 @@
 package com.cn.tenmall.service.album;
 
-import com.cn.tenmall.entity.WxTabAlbum;
 import com.cn.tenmall.vo.TenmallResult;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface AlbumService {
     TenmallResult findAll();
 
     TenmallResult findById(Long id);
 
-    TenmallResult save(WxTabAlbum album);
-
-    TenmallResult modify(WxTabAlbum album);
-
     TenmallResult delete(Long id);
+
+    TenmallResult save(String title, HttpServletRequest request);
+
+    TenmallResult modify(Long id, String title, HttpServletRequest request);
 }
