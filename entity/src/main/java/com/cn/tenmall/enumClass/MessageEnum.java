@@ -37,7 +37,7 @@ public enum MessageEnum {
      * 接收的参数无效
      */
     VARIABLE_INVALID_ERROR(1, "参数无效,请检查后,重新尝试"),
-
+    FILE_ERROR(1,"上传文件失败"),
     /**
      * 接收的参数数量不符合要求
      */
